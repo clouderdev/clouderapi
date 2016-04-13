@@ -29,7 +29,7 @@ public class ProcessApi {
 	@Path("save")
 	public Response save() {
 		processService.saveUser();
-		return Response.ok().entity("{\"message\" : \"All iz well\"}").build();
+		return Response.ok().entity("{\"message\" : \"All is well\"}").build();
 	}
 
 	@GET

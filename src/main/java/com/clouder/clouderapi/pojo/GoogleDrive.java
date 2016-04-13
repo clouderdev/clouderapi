@@ -1,8 +1,7 @@
 package com.clouder.clouderapi.pojo;
 
 import com.clouder.clouderapi.document.Cloud;
-
-import enums.CloudType;
+import com.clouder.clouderapi.enums.CloudType;
 
 public class GoogleDrive extends Cloud {
 

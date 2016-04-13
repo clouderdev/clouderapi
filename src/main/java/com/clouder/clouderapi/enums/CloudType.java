@@ -1,4 +1,4 @@
-package enums;
+package com.clouder.clouderapi.enums;
 
 public enum CloudType {
 

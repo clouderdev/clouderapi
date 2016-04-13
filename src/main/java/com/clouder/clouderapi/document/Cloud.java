@@ -6,7 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import enums.CloudType;
+import com.clouder.clouderapi.enums.CloudType;
 
 public abstract class Cloud {
 	@Id

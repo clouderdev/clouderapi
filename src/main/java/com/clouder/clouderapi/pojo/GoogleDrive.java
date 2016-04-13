@@ -2,6 +2,8 @@ package com.clouder.clouderapi.pojo;
 
 import com.clouder.clouderapi.document.Cloud;
 
+import enums.CloudType;
+
 public class GoogleDrive extends Cloud {
 
 	private String accessToken;
@@ -24,16 +26,15 @@ public class GoogleDrive extends Cloud {
 		this.refreshToken = refreshToken;
 	}
 
-	public GoogleDrive(String cloudType, String accessToken, String refreshToken) {
-		super(cloudType);
+	public GoogleDrive(String accessToken, String refreshToken) {
+		super(CloudType.GOOGLEDRIVE);
 		this.accessToken = accessToken;
 		this.refreshToken = refreshToken;
 	}
 
 	@Override
 	public String toString() {
-		return "GoogleDrive [accessToken=" + accessToken + ", refreshToken="
-				+ refreshToken + "]";
+		return "GoogleDrive [accessToken=" + accessToken + ", refreshToken=" + refreshToken + "]";
 	}
 
 }

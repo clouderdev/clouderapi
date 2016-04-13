@@ -2,15 +2,16 @@ package com.clouder.clouderapi.pojo;
 
 import com.clouder.clouderapi.document.Cloud;
 
+import enums.CloudType;
+
 public class DropBox extends Cloud {
 
 	private String dropBoxAccessToken;
 
 	private String dropboxRefreshToken;
 
-	public DropBox(String cloudType, String dropBoxAccessToken,
-			String dropboxRefreshToken) {
-		super(cloudType);
+	public DropBox(String dropBoxAccessToken, String dropboxRefreshToken) {
+		super(CloudType.DROPBOX);
 		this.dropBoxAccessToken = dropBoxAccessToken;
 		this.dropboxRefreshToken = dropboxRefreshToken;
 	}
@@ -33,8 +34,8 @@ public class DropBox extends Cloud {
 
 	@Override
 	public String toString() {
-		return "DropBox [dropBoxAccessToken=" + dropBoxAccessToken
-				+ ", dropboxRefreshToken=" + dropboxRefreshToken + "]";
+		return "DropBox [dropBoxAccessToken=" + dropBoxAccessToken + ", dropboxRefreshToken=" + dropboxRefreshToken
+				+ "]";
 	}
 
 }

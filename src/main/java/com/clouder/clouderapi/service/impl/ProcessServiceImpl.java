@@ -25,17 +25,15 @@ public class ProcessServiceImpl implements ProcessService {
 
 	@Override
 	public void saveUser() {
-		Cloud googleDrive = new GoogleDrive("GD", "accessToken", "refreshToken");
-		Cloud dropBox = new DropBox("DB", "dropBoxAccessToken",
-				"dropBoxRefreshToken");
+		Cloud googleDrive = new GoogleDrive("accessToken", "refreshToken");
+		Cloud dropBox = new DropBox("dropBoxAccessToken", "dropBoxRefreshToken");
 		List<Cloud> clouds = new ArrayList<>();
 		clouds.add(googleDrive);
 		clouds.add(dropBox);
 
 		cloudRepository.save(clouds);
 
-		User user = new User("ssshukla1993@gmail.com", "Shrinivas", "Shukla",
-				"shrinivas93", "P@ssw0rd", clouds);
+		User user = new User("ssshukla1993@gmail.com", "Shrinivas", "Shukla", "shrinivas93", "P@ssw0rd", clouds);
 		userRepository.save(user);
 	}
 

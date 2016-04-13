@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.clouder.clouderapi.document.Cloud;
-import com.clouder.clouderapi.document.DropBox;
-import com.clouder.clouderapi.document.GoogleDrive;
 import com.clouder.clouderapi.document.User;
+import com.clouder.clouderapi.pojo.DropBox;
+import com.clouder.clouderapi.pojo.GoogleDrive;
 import com.clouder.clouderapi.repository.CloudRepository;
 import com.clouder.clouderapi.repository.UserRepository;
 import com.clouder.clouderapi.service.ProcessService;

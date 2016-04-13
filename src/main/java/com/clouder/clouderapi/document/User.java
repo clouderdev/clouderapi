@@ -2,6 +2,7 @@ package com.clouder.clouderapi.document;
 
 import java.util.List;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -9,6 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class User {
 
 	@Id
+	@JsonIgnore
 	private String id;
 
 	private String emailId;
@@ -23,8 +25,8 @@ public class User {
 
 	private List<Cloud> clouds;
 
-	public User(String emailId, String firstName, String lastName, String username, String password,
-			List<Cloud> clouds) {
+	public User(String emailId, String firstName, String lastName,
+			String username, String password, List<Cloud> clouds) {
 		super();
 		this.emailId = emailId;
 		this.firstName = firstName;
@@ -92,8 +94,10 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", emailId=" + emailId + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", username=" + username + ", password=" + password + ", clouds=" + clouds + "]";
+		return "User [id=" + id + ", emailId=" + emailId + ", firstName="
+				+ firstName + ", lastName=" + lastName + ", username="
+				+ username + ", password=" + password + ", clouds=" + clouds
+				+ "]";
 	}
 
 }

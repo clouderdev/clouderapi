@@ -1,9 +1,13 @@
 package com.clouder.clouderapi.document;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection = "cloud")
 public abstract class Cloud {
 	@Id
+	@JsonIgnore
 	protected String id;
 
 	protected String cloudType;

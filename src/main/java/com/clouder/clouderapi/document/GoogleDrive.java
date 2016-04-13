@@ -1,8 +1,5 @@
 package com.clouder.clouderapi.document;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
-@Document(collection = "cloud")
 public class GoogleDrive extends Cloud {
 
 	private String accessToken;
@@ -33,7 +30,8 @@ public class GoogleDrive extends Cloud {
 
 	@Override
 	public String toString() {
-		return "GoogleDrive [accessToken=" + accessToken + ", refreshToken=" + refreshToken + "]";
+		return "GoogleDrive [accessToken=" + accessToken + ", refreshToken="
+				+ refreshToken + "]";
 	}
 
 }

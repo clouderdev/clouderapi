@@ -10,6 +10,7 @@ import com.clouder.clouderapi.document.Cloud;
 import com.clouder.clouderapi.document.DropBox;
 import com.clouder.clouderapi.document.GoogleDrive;
 import com.clouder.clouderapi.document.User;
+import com.clouder.clouderapi.repository.CloudRepository;
 import com.clouder.clouderapi.repository.UserRepository;
 import com.clouder.clouderapi.service.ProcessService;
 
@@ -18,6 +19,9 @@ public class ProcessServiceImpl implements ProcessService {
 
 	@Autowired
 	UserRepository userRepository;
+
+	@Autowired
+	CloudRepository cloudRepository;
 
 	@Override
 	public void saveUser() {
@@ -28,9 +32,23 @@ public class ProcessServiceImpl implements ProcessService {
 		clouds.add(googleDrive);
 		clouds.add(dropBox);
 
+		cloudRepository.save(clouds);
+
 		User user = new User("ssshukla1993@gmail.com", "Shrinivas", "Shukla",
 				"shrinivas93", "P@ssw0rd", clouds);
 		userRepository.save(user);
+	}
+
+	@Override
+	public List<User> getUsers() {
+		List<User> users;
+		users = userRepository.findAll();
+		User user = users.get(0);
+		List<Cloud> clouds = user.getClouds();
+		for (Cloud cloud : clouds) {
+			System.out.println(cloud);
+		}
+		return users;
 	}
 
 }

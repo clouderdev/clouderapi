@@ -4,6 +4,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.clouder.clouderapi.document.GoogleDrive;
 
-public interface GoogleDriveRepository extends MongoRepository<GoogleDrive, String> {
+public interface GoogleDriveRepository extends
+		MongoRepository<GoogleDrive, String> {
 
 }

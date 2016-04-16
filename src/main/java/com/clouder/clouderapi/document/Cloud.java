@@ -2,16 +2,12 @@ package com.clouder.clouderapi.document;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import com.clouder.clouderapi.enums.CloudType;
 
 public abstract class Cloud {
-	@Id
-	@JsonIgnore
-	protected String id;
 
 	@Transient
 	@JsonIgnore
@@ -25,14 +21,6 @@ public abstract class Cloud {
 		super();
 		this.cloudType = cloudType;
 		this.cloudTypeText = cloudType.name();
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public CloudType getCloudType() {
@@ -55,7 +43,7 @@ public abstract class Cloud {
 
 	@Override
 	public String toString() {
-		return "Cloud [id=" + id + ", cloudType=" + cloudType + "]";
+		return "Cloud [cloudType=" + cloudType + ", cloudTypeText=" + cloudTypeText + "]";
 	}
 
 }

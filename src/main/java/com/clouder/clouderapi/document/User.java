@@ -1,8 +1,10 @@
 package com.clouder.clouderapi.document;
 
+import java.util.Date;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -25,8 +27,11 @@ public class User {
 
 	private List<Cloud> clouds;
 
-	public User(String emailId, String firstName, String lastName,
-			String username, String password, List<Cloud> clouds) {
+	@CreatedDate
+	private Date createdDate;
+
+	public User(String emailId, String firstName, String lastName, String username, String password,
+			List<Cloud> clouds) {
 		super();
 		this.emailId = emailId;
 		this.firstName = firstName;
@@ -92,12 +97,19 @@ public class User {
 		this.clouds = clouds;
 	}
 
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", emailId=" + emailId + ", firstName="
-				+ firstName + ", lastName=" + lastName + ", username="
-				+ username + ", password=" + password + ", clouds=" + clouds
-				+ "]";
+		return "User [id=" + id + ", emailId=" + emailId + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", username=" + username + ", password=" + password + ", clouds=" + clouds + ", createdDate="
+				+ createdDate + "]";
 	}
 
 }

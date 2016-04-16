@@ -15,9 +15,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.clouder.clouderapi.document.Cloud;
 import com.clouder.clouderapi.document.User;
-import com.clouder.clouderapi.service.CloudService;
 import com.clouder.clouderapi.service.ProcessService;
 
 @Path("process")
@@ -26,9 +24,6 @@ public class ProcessApi {
 
 	@Autowired
 	private ProcessService processService;
-
-	@Autowired
-	private CloudService cloudService;
 
 	@GET
 	@Path("save")
@@ -47,13 +42,4 @@ public class ProcessApi {
 		return Response.ok().entity(json).build();
 	}
 
-	@GET
-	@Path("clouds")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getClouds() throws JsonGenerationException, JsonMappingException, IOException {
-		List<Cloud> clouds = cloudService.getClouds();
-		ObjectMapper om = new ObjectMapper();
-		String json = om.writeValueAsString(clouds);
-		return Response.ok().entity(json).build();
-	}
 }

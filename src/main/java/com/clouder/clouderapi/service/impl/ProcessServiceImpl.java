@@ -10,7 +10,6 @@ import com.clouder.clouderapi.document.Cloud;
 import com.clouder.clouderapi.document.User;
 import com.clouder.clouderapi.pojo.DropBox;
 import com.clouder.clouderapi.pojo.GoogleDrive;
-import com.clouder.clouderapi.repository.CloudRepository;
 import com.clouder.clouderapi.repository.UserRepository;
 import com.clouder.clouderapi.service.ProcessService;
 
@@ -20,9 +19,6 @@ public class ProcessServiceImpl implements ProcessService {
 	@Autowired
 	UserRepository userRepository;
 
-	@Autowired
-	CloudRepository cloudRepository;
-
 	@Override
 	public void saveUser() {
 		Cloud googleDrive = new GoogleDrive("accessToken", "refreshToken");
@@ -31,9 +27,7 @@ public class ProcessServiceImpl implements ProcessService {
 		clouds.add(googleDrive);
 		clouds.add(dropBox);
 
-		cloudRepository.save(clouds);
-
-		User user = new User("ssshukla1993@gmail.com", "Shrinivas", "Shukla", "shrinivas93", "P@ssw0rd", clouds);
+		User user = new User("ssshukla1993@gmail.com", "Shrinivas", null, "shrinivas93", "P@ssw0rd", clouds);
 		userRepository.save(user);
 	}
 

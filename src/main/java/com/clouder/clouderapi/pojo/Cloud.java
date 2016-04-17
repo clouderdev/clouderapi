@@ -1,21 +1,32 @@
-package com.clouder.clouderapi.document;
+package com.clouder.clouderapi.pojo;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.annotate.JsonSubTypes;
+import org.codehaus.jackson.annotate.JsonSubTypes.Type;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.annotate.JsonTypeInfo.As;
+import org.codehaus.jackson.annotate.JsonTypeInfo.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import com.clouder.clouderapi.enums.CloudType;
 
+@JsonTypeInfo(use = Id.NAME, include = As.PROPERTY, property = "cloudType")
+@JsonSubTypes({ @Type(value = GoogleDrive.class, name = "GOOGLEDRIVE"),
+		@Type(value = DropBox.class, name = "DROPBOX") })
 public abstract class Cloud {
 
 	@Transient
 	@JsonIgnore
-	protected CloudType cloudType;
+	public CloudType cloudType;
 
 	@JsonProperty("cloudType")
 	@Field("cloudType")
-	protected String cloudTypeText;
+	public String cloudTypeText;
+
+	public Cloud() {
+	}
 
 	public Cloud(CloudType cloudType) {
 		super();

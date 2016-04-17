@@ -1,6 +1,5 @@
 package com.clouder.clouderapi.pojo;
 
-import com.clouder.clouderapi.document.Cloud;
 import com.clouder.clouderapi.enums.CloudType;
 
 public class DropBox extends Cloud {
@@ -8,6 +7,10 @@ public class DropBox extends Cloud {
 	private String dropBoxAccessToken;
 
 	private String dropboxRefreshToken;
+	
+	public DropBox() {
+		super(CloudType.DROPBOX);
+	}
 
 	public DropBox(String dropBoxAccessToken, String dropboxRefreshToken) {
 		super(CloudType.DROPBOX);

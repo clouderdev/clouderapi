@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.clouder.clouderapi.document.User;
 
-public interface ProcessService {
-	void saveUser();
+public interface UserService {
+	void saveUser(String json);
 
 	List<User> getUsers();
 }

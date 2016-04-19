@@ -20,14 +20,42 @@ public class UserServiceImpl implements UserService {
 	JsonUtility jsonUtility;
 
 	@Override
-	public void saveUser(String json) {
+	public boolean saveUser(String json) {
+		boolean inserted = false;
 		User user = jsonUtility.toObject(json, User.class);
-		userRepository.save(user);
+		User insertedUser = userRepository.save(user);
+		if (insertedUser != null)
+			inserted = true;
+		return inserted;
 	}
 
 	@Override
 	public List<User> getUsers() {
 		return userRepository.findAll();
 	}
+
+	@Override
+	public User findByUsername(String username) {
+		// TODO Auto-generated method stub
+		return userRepository.findByUsername(username);
+	}
+
+	@Override
+	public String getPublicKey(User user) {
+		// TODO Auto-generated method stub
+		return userRepository.findPublicKey(user.getUsername());
+	}
+
+	@Override
+	public boolean saveUser(User user) {
+		// TODO Auto-generated method stub
+		boolean inserted = false;
+		User insertedUser = userRepository.save(user);
+		if(insertedUser != null)
+			inserted = true;
+		return inserted;
+	}
+	
+	
 
 }

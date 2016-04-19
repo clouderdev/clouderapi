@@ -8,30 +8,34 @@ import java.security.SecureRandom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.clouder.clouderapi.document.User;
+import com.clouder.clouderapi.exception.NoSuchUserException;
+import com.clouder.clouderapi.repository.UserRepository;
 import com.clouder.clouderapi.service.KeyGenerationService;
+import com.clouder.clouderapi.service.UserService;
 
 @Service
 public class KeyGenerationServiceImpl implements KeyGenerationService {
 
 	@Autowired
-	SecureRandom secureRandom;
+	private SecureRandom secureRandom;
 
 	@Autowired
-	KeyPairGenerator keyPairGenerator;
+	private KeyPairGenerator keyPairGenerator;
 
-	@Override
-	public KeyPair getKeyPair() throws NoSuchAlgorithmException {
+	@Autowired
+	private UserService userService;
+
+	private KeyPair getKeyPair() throws NoSuchAlgorithmException {
 		keyPairGenerator.initialize(512, secureRandom);
 		return keyPairGenerator.generateKeyPair();
 	}
 
-	@Override
-	public String getPrivateKey(KeyPair keyPair) {
+	private String getPrivateKey(KeyPair keyPair) {
 		return getKeyString(keyPair.getPrivate().getEncoded());
 	}
 
-	@Override
-	public String getPublicKey(KeyPair keyPair) {
+	private String getPublicKey(KeyPair keyPair) {
 		return getKeyString(keyPair.getPublic().getEncoded());
 	}
 
@@ -41,6 +45,27 @@ public class KeyGenerationServiceImpl implements KeyGenerationService {
 			keyString.append(Integer.toHexString(0x0100 + (key[i] & 0x00FF)).substring(1));
 		}
 		return keyString.toString();
+	}
+
+	@Override
+	public String getPublicKey(String username) throws NoSuchAlgorithmException, NoSuchUserException {
+		// TODO Auto-generated method stub
+		String publicKey = null;
+		User user = userService.findByUsername(username);
+		if (user != null) {
+			publicKey = user.getPublicKey();
+			if (publicKey == null) {
+				KeyPair keyPair = getKeyPair();
+				String privateKey = getPrivateKey(keyPair);
+				publicKey = getPublicKey(keyPair);
+				user.setPublicKey(publicKey);
+				user.setPrivateKey(privateKey);
+				userService.saveUser(user);
+			}
+		} else {
+			throw new NoSuchUserException("User with " + username + "does not exists", null);
+		}
+		return publicKey;
 	}
 
 }

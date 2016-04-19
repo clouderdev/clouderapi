@@ -1,12 +1,12 @@
 package com.clouder.clouderapi.api;
 
-import java.security.KeyPair;
 import java.security.NoSuchAlgorithmException;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -30,12 +30,14 @@ public class KeyGenerationApi {
 	private KeyGenerationService keyGenerationService;
 
 	@GET
-	public Response getPublicKey() throws NoSuchAlgorithmException {
-		KeyPair keyPair = keyGenerationService.getKeyPair();
-		String privateKey = keyGenerationService.getPrivateKey(keyPair);
-		String publicKey = keyGenerationService.getPublicKey(keyPair);
+	public Response getPublicKey(@QueryParam("username") String username) throws NoSuchAlgorithmException {
+//		KeyPair keyPair = keyGenerationService.getKeyPair();
+//		String privateKey = keyGenerationService.getPrivateKey(keyPair);
+//		String publicKey = keyGenerationService.getPublicKey(keyPair);
+		
+		String publicKey = keyGenerationService.getPublicKey(username);
 
-		return responseService.getSuccessResponse(privateKey, "List of all users", Status.OK.getStatusCode());
+		return responseService.getSuccessResponse(publicKey, "List of all users", Status.OK.getStatusCode());
 	}
 
 }

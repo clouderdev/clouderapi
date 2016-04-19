@@ -36,4 +36,14 @@
 	<mongo:repositories base-package="com.clouder.clouderapi.repository" />
 
 	<bean id="objectMapper" class="org.codehaus.jackson.map.ObjectMapper" />
+
+	<bean id="secureRandom" class="java.security.SecureRandom" />
+
+	<bean id="keyPairGenerator" class="java.security.KeyPairGenerator"
+		factory-method="getInstance">
+		<constructor-arg>
+			<value>RSA</value>
+		</constructor-arg>
+	</bean>
+
 </beans>

@@ -13,13 +13,13 @@ import com.clouder.clouderapi.service.ResponseService;
 @Provider
 public class ClouderExceptionMapper implements ExceptionMapper<ClouderException> {
 
-	@Autowired
-	private ResponseService responseService;
+    @Autowired
+    private ResponseService responseService;
 
-	@Override
-	public Response toResponse(ClouderException exception) {
-		String message = exception.getMessage();
-		return responseService.getErrorResponse(message, Status.INTERNAL_SERVER_ERROR.getStatusCode());
-	}
+    @Override
+    public Response toResponse(ClouderException exception) {
+        String message = exception.getMessage();
+        return responseService.getErrorResponse(message, Status.INTERNAL_SERVER_ERROR.getStatusCode());
+    }
 
 }

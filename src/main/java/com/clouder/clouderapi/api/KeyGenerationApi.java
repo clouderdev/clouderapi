@@ -23,21 +23,18 @@ import com.clouder.clouderapi.service.ResponseService;
 @Consumes(MediaType.APPLICATION_JSON)
 public class KeyGenerationApi {
 
-	@Autowired
-	private ResponseService responseService;
+    @Autowired
+    private ResponseService      responseService;
 
-	@Autowired
-	private KeyGenerationService keyGenerationService;
+    @Autowired
+    private KeyGenerationService keyGenerationService;
 
-	@GET
-	public Response getPublicKey(@QueryParam("username") String username) throws NoSuchAlgorithmException {
-//		KeyPair keyPair = keyGenerationService.getKeyPair();
-//		String privateKey = keyGenerationService.getPrivateKey(keyPair);
-//		String publicKey = keyGenerationService.getPublicKey(keyPair);
-		
-		String publicKey = keyGenerationService.getPublicKey(username);
+    @GET
+    public Response getPublicKey(@QueryParam("username") String username) throws NoSuchAlgorithmException {
+        String publicKey = keyGenerationService.getPublicKey(username);
 
-		return responseService.getSuccessResponse(publicKey, "List of all users", Status.OK.getStatusCode());
-	}
+        return responseService.getSuccessResponse(publicKey, "Public key for username '" + username + "'",
+                Status.OK.getStatusCode());
+    }
 
 }

@@ -7,7 +7,5 @@ import com.clouder.clouderapi.document.User;
 
 public interface UserRepository extends MongoRepository<User, String> {
 
-	User findByUsername(@Param("username") String username);
-
-	String findPublicKey(@Param("username") String username);
+    User findByUsername(@Param("username") String username);
 }

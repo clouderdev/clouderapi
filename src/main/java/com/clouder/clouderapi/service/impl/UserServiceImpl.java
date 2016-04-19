@@ -13,49 +13,41 @@ import com.clouder.clouderapi.util.JsonUtility;
 @Service
 public class UserServiceImpl implements UserService {
 
-	@Autowired
-	UserRepository userRepository;
+    @Autowired
+    UserRepository userRepository;
 
-	@Autowired
-	JsonUtility jsonUtility;
+    @Autowired
+    JsonUtility    jsonUtility;
 
-	@Override
-	public boolean saveUser(String json) {
-		boolean inserted = false;
-		User user = jsonUtility.toObject(json, User.class);
-		User insertedUser = userRepository.save(user);
-		if (insertedUser != null)
-			inserted = true;
-		return inserted;
-	}
+    @Override
+    public boolean saveUser(String json) {
+        boolean inserted = false;
+        User user = jsonUtility.toObject(json, User.class);
+        User insertedUser = userRepository.save(user);
+        if (insertedUser != null) {
+            inserted = true;
+        }
+        return inserted;
+    }
 
-	@Override
-	public List<User> getUsers() {
-		return userRepository.findAll();
-	}
+    @Override
+    public List<User> getUsers() {
+        return userRepository.findAll();
+    }
 
-	@Override
-	public User findByUsername(String username) {
-		// TODO Auto-generated method stub
-		return userRepository.findByUsername(username);
-	}
+    @Override
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
 
-	@Override
-	public String getPublicKey(User user) {
-		// TODO Auto-generated method stub
-		return userRepository.findPublicKey(user.getUsername());
-	}
-
-	@Override
-	public boolean saveUser(User user) {
-		// TODO Auto-generated method stub
-		boolean inserted = false;
-		User insertedUser = userRepository.save(user);
-		if(insertedUser != null)
-			inserted = true;
-		return inserted;
-	}
-	
-	
+    @Override
+    public boolean saveUser(User user) {
+        boolean inserted = false;
+        User insertedUser = userRepository.save(user);
+        if (insertedUser != null) {
+            inserted = true;
+        }
+        return inserted;
+    }
 
 }

@@ -9,14 +9,6 @@
 	http://www.springframework.org/schema/data/mongo
     http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
 
-	<bean
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location" value="classpath:application.properties" />
-	</bean>
-
-	<context:annotation-config />
-	<context:component-scan base-package="com.clouder.clouderapi" />
-
 	<mongo:mongo id="mongo" host="${mongo.host}" port="${mongo.port}"
 		write-concern="SAFE">
 		<mongo:options />
@@ -34,16 +26,5 @@
 	</bean>
 
 	<mongo:repositories base-package="com.clouder.clouderapi.repository" />
-
-	<bean id="objectMapper" class="org.codehaus.jackson.map.ObjectMapper" />
-
-	<bean id="secureRandom" class="java.security.SecureRandom" />
-
-	<bean id="keyPairGenerator" class="java.security.KeyPairGenerator"
-		factory-method="getInstance">
-		<constructor-arg>
-			<value>RSA</value>
-		</constructor-arg>
-	</bean>
 
 </beans>

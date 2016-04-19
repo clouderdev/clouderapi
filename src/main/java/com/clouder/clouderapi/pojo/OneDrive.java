@@ -4,39 +4,39 @@ import com.clouder.clouderapi.enums.CloudType;
 
 public class OneDrive extends Cloud {
 
-	private String accessToken;
+    private String accessToken;
 
-	private String refreshToken;
+    private String refreshToken;
 
-	public OneDrive() {
-		super(CloudType.ONEDRIVE);
-	}
-	
-	public OneDrive(String accessToken, String refreshToken) {
-		super(CloudType.ONEDRIVE);
-		this.accessToken = accessToken;
-		this.refreshToken = refreshToken;
-	}
+    public OneDrive() {
+        super(CloudType.ONEDRIVE);
+    }
 
-	public String getAccessToken() {
-		return accessToken;
-	}
+    public OneDrive(String accessToken, String refreshToken) {
+        super(CloudType.ONEDRIVE);
+        this.accessToken = accessToken;
+        this.refreshToken = refreshToken;
+    }
 
-	public void setAccessToken(String accessToken) {
-		this.accessToken = accessToken;
-	}
+    public String getAccessToken() {
+        return accessToken;
+    }
 
-	public String getRefreshToken() {
-		return refreshToken;
-	}
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
 
-	public void setRefreshToken(String refreshToken) {
-		this.refreshToken = refreshToken;
-	}
+    public String getRefreshToken() {
+        return refreshToken;
+    }
 
-	@Override
-	public String toString() {
-		return "OneDrive [accessToken=" + accessToken + ", refreshToken=" + refreshToken + "]";
-	}
-	
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
+    }
+
+    @Override
+    public String toString() {
+        return "OneDrive [accessToken=" + accessToken + ", refreshToken=" + refreshToken + "]";
+    }
+
 }

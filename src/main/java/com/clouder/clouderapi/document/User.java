@@ -11,118 +11,121 @@ import com.clouder.clouderapi.pojo.Cloud;
 @Document(collection = "user")
 public class User {
 
-	@Id
-	@JsonIgnore
-	private String id;
+    @Id
+    @JsonIgnore
+    private String      id;
 
-	private String emailId;
+    private String      emailId;
 
-	private String firstName;
+    private String      firstName;
 
-	private String lastName;
+    private String      lastName;
 
-	private String username;
+    private String      username;
 
-	private String password;
-	
-	private String publicKey;
-	
-	private String privateKey;
+    @JsonIgnore
+    private String      password;
 
-	private List<Cloud> clouds;
-	
-	public User() {
-		//Default constructor for Jackson
-	}
+    @JsonIgnore
+    private String      publicKey;
 
-	public User(String emailId, String firstName, String lastName, String username, String password,
-			List<Cloud> clouds) {
-		super();
-		this.emailId = emailId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.username = username;
-		this.password = password;
-		this.clouds = clouds;
-	}
+    @JsonIgnore
+    private String      privateKey;
 
-	public String getId() {
-		return id;
-	}
+    private List<Cloud> clouds;
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    public User() {
+        // Default constructor for Jackson
+    }
 
-	public String getEmailId() {
-		return emailId;
-	}
+    public User(String emailId, String firstName, String lastName, String username, String password,
+            List<Cloud> clouds) {
+        super();
+        this.emailId = emailId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.clouds = clouds;
+    }
 
-	public void setEmailId(String emailId) {
-		this.emailId = emailId;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public String getFirstName() {
-		return firstName;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    public String getEmailId() {
+        return emailId;
+    }
 
-	public String getLastName() {
-		return lastName;
-	}
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
+    }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public String getLastName() {
+        return lastName;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public List<Cloud> getClouds() {
-		return clouds;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public void setClouds(List<Cloud> clouds) {
-		this.clouds = clouds;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public String getPublicKey() {
-		return publicKey;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public void setPublicKey(String publicKey) {
-		this.publicKey = publicKey;
-	}
+    public List<Cloud> getClouds() {
+        return clouds;
+    }
 
-	public String getPrivateKey() {
-		return privateKey;
-	}
+    public void setClouds(List<Cloud> clouds) {
+        this.clouds = clouds;
+    }
 
-	public void setPrivateKey(String privateKey) {
-		this.privateKey = privateKey;
-	}
+    public String getPublicKey() {
+        return publicKey;
+    }
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", emailId=" + emailId + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", username=" + username + ", password=" + password + ", publicKey=" + publicKey + ", privateKey="
-				+ privateKey + ", clouds=" + clouds + "]";
-	}
+    public void setPublicKey(String publicKey) {
+        this.publicKey = publicKey;
+    }
+
+    public String getPrivateKey() {
+        return privateKey;
+    }
+
+    public void setPrivateKey(String privateKey) {
+        this.privateKey = privateKey;
+    }
+
+    @Override
+    public String toString() {
+        return "User [id=" + id + ", emailId=" + emailId + ", firstName=" + firstName + ", lastName=" + lastName
+                + ", username=" + username + ", password=" + password + ", publicKey=" + publicKey + ", privateKey="
+                + privateKey + ", clouds=" + clouds + "]";
+    }
 
 }

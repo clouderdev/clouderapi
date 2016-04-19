@@ -5,13 +5,11 @@ import java.util.List;
 import com.clouder.clouderapi.document.User;
 
 public interface UserService {
-	boolean saveUser(String json);
+    boolean saveUser(String json);
 
-	List<User> getUsers();
-	
-	User findByUsername(String username);
+    List<User> getUsers();
 
-	String getPublicKey(User user);
+    User findByUsername(String username);
 
-	boolean saveUser(User user);
+    boolean saveUser(User user);
 }

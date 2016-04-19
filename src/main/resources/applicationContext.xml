@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/data/mongo
+    http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
+
+	<import resource="springContext.xml" />
+	<import resource="mongoContext.xml" />
+	<import resource="beanContext.xml" />
+
+	<!-- <bean -->
+	<!-- class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> -->
+	<!-- <property name="location" value="classpath:application.properties" 
+		/> -->
+	<!-- </bean> -->
+
+	<!-- <context:annotation-config /> -->
+	<!-- <context:component-scan base-package="com.clouder.clouderapi" /> -->
+
+	<!-- <mongo:mongo id="mongo" host="${mongo.host}" port="${mongo.port}" -->
+	<!-- write-concern="SAFE"> -->
+	<!-- <mongo:options /> -->
+	<!-- </mongo:mongo> -->
+
+	<!-- <bean id="userCredentials" class="org.springframework.data.authentication.UserCredentials"> -->
+	<!-- <constructor-arg value="${mongo.username}" /> -->
+	<!-- <constructor-arg value="${mongo.password}" /> -->
+	<!-- </bean> -->
+
+	<!-- <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate"> -->
+	<!-- <constructor-arg ref="mongo" /> -->
+	<!-- <constructor-arg value="${mongo.db}" /> -->
+	<!-- <constructor-arg ref="userCredentials" /> -->
+	<!-- </bean> -->
+
+	<!-- <mongo:repositories base-package="com.clouder.clouderapi.repository" 
+		/> -->
+
+	<!-- <bean id="objectMapper" class="org.codehaus.jackson.map.ObjectMapper" 
+		/> -->
+
+	<!-- <bean id="secureRandom" class="java.security.SecureRandom" /> -->
+
+	<!-- <bean id="keyPairGenerator" class="java.security.KeyPairGenerator" -->
+	<!-- factory-method="getInstance"> -->
+	<!-- <constructor-arg> -->
+	<!-- <value>RSA</value> -->
+	<!-- </constructor-arg> -->
+	<!-- </bean> -->
+
+</beans>

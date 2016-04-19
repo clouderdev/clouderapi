@@ -12,14 +12,14 @@ import com.clouder.clouderapi.service.ResponseService;
 @Provider
 public class WebApplicationExceptionMapper implements ExceptionMapper<WebApplicationException> {
 
-	@Autowired
-	private ResponseService responseService;
+    @Autowired
+    private ResponseService responseService;
 
-	@Override
-	public Response toResponse(WebApplicationException exception) {
-		String message = exception.getMessage();
-		int code = exception.getResponse().getStatus();
-		return responseService.getErrorResponse(message, code);
-	}
+    @Override
+    public Response toResponse(WebApplicationException exception) {
+        String message = exception.getMessage();
+        int code = exception.getResponse().getStatus();
+        return responseService.getErrorResponse(message, code);
+    }
 
 }

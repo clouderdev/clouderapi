@@ -20,14 +20,9 @@ public class UserServiceImpl implements UserService {
     JsonUtility    jsonUtility;
 
     @Override
-    public boolean saveUser(String json) {
-        boolean inserted = false;
+    public User saveUser(String json) {
         User user = jsonUtility.toObject(json, User.class);
-        User insertedUser = userRepository.save(user);
-        if (insertedUser != null) {
-            inserted = true;
-        }
-        return inserted;
+        return userRepository.save(user);
     }
 
     @Override
@@ -41,13 +36,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean saveUser(User user) {
-        boolean inserted = false;
-        User insertedUser = userRepository.save(user);
-        if (insertedUser != null) {
-            inserted = true;
-        }
-        return inserted;
+    public User saveUser(User user) {
+        return userRepository.save(user);
     }
 
 }

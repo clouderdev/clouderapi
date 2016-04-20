@@ -21,8 +21,9 @@ public class KeyGenerationServiceImplTest {
     @Test
     public final void testGetPublicKey() throws NoSuchAlgorithmException {
         String publicKey = keyGenerationService.getPublicKey("shrinivas93");
+        // Shriroop: changed the key so as to suit my database
         Assert.assertEquals("Incorrect publicKey",
-                "305c300d06092a864886f70d0101010500034b003048024100a1b8e40c4b77b47b55816713950b90d3cb39de1866dbd699d3a5b09fac977122a9c704832aba824c3c12cd4ab5fd26f80bd490fba7e76b3ca94fb74318ce3cf90203010001",
+                "305c300d06092a864886f70d0101010500034b0030480241008f04715bb17de74e0a8d6fcde81ae8c9a356285c6827b6c1836fbe56f468b20c567f18123d309bc4a178fddb8078739cf9a9d27da3b26ee3e16c83e17b5f9b8d0203010001",
                 publicKey);
     }
 

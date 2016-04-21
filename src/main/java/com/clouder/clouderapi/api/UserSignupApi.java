@@ -1,5 +1,6 @@
 package com.clouder.clouderapi.api;
 
+import javax.mail.MessagingException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -40,13 +41,14 @@ public class UserSignupApi {
 
     @POST
     @Path("password")
-    public Response savePassword(String json) {
+    public Response savePassword(String json) throws MessagingException {
         User user = userService.savePassword(json);
         if (user != null) {
-            return responseService.getSuccessResponse("User created", Status.CREATED.getStatusCode());
+            return responseService.getSuccessResponse("Password saved", Status.CREATED.getStatusCode());
         } else {
-            return responseService.getErrorResponse("Unable to create user",
+            return responseService.getErrorResponse("Unable to save password",
                     Status.INTERNAL_SERVER_ERROR.getStatusCode());
         }
     }
+
 }

@@ -1,8 +1,10 @@
 package com.clouder.clouderapi.service.impl;
 
+import java.nio.charset.StandardCharsets;
 import java.security.KeyFactory;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
+import java.security.MessageDigest;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.SecureRandom;
@@ -33,6 +35,9 @@ public class KeyGenerationServiceImpl implements KeyGenerationService {
 
     @Autowired
     private KeyFactory keyFactory;
+
+    @Autowired
+    private MessageDigest messageDigest;
 
     @Autowired
     private UserService userService;
@@ -104,9 +109,8 @@ public class KeyGenerationServiceImpl implements KeyGenerationService {
     }
 
     @Override
-    public String hash(String password) {
-        // TODO needs to be implemented
-        return password;
+    public String encodeString(String password) {
+        return getBase64(messageDigest.digest(password.getBytes(StandardCharsets.UTF_8)));
     }
 
 }

@@ -11,7 +11,13 @@
 
 	<bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location" value="classpath:application.properties" />
+		<property name="locations">
+			<list>
+				<value>classpath:application.properties</value>
+				<value>classpath:email.properties</value>
+				<value>classpath:admin.properties</value>
+			</list>
+		</property>
 	</bean>
 
 	<context:annotation-config />

@@ -23,18 +23,30 @@ public class UserSignupApi {
 
     @Autowired
     private ResponseService responseService;
-    
+
     @Autowired
     private UserService userService;
 
     @POST
     public Response signup(String json) {
-        User user = userService.saveUser(json); 
+        User user = userService.saveUser(json);
         if (user != null) {
             return responseService.getSuccessResponse("User created", Status.CREATED.getStatusCode());
+        } else {
+            return responseService.getErrorResponse("Unable to create user",
+                    Status.INTERNAL_SERVER_ERROR.getStatusCode());
         }
-        else {
-            return responseService.getErrorResponse("Unable to create user", Status.INTERNAL_SERVER_ERROR.getStatusCode());
+    }
+
+    @POST
+    @Path("password")
+    public Response savePassword(String json) {
+        User user = userService.savePassword(json);
+        if (user != null) {
+            return responseService.getSuccessResponse("User created", Status.CREATED.getStatusCode());
+        } else {
+            return responseService.getErrorResponse("Unable to create user",
+                    Status.INTERNAL_SERVER_ERROR.getStatusCode());
         }
     }
 }

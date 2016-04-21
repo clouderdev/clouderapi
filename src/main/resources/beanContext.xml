@@ -16,8 +16,17 @@
 	<bean id="keyPairGenerator" class="java.security.KeyPairGenerator"
 		factory-method="getInstance">
 		<constructor-arg>
-			<value>RSA</value>
+			<value>${crypt.algo}</value>
 		</constructor-arg>
 	</bean>
+
+	<bean id="keyFactory" class="java.security.KeyFactory"
+		factory-method="getInstance">
+		<constructor-arg>
+			<value>${crypt.algo}</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="cryptUtility" class="com.clouder.clouderapi.util.CryptUtility" />
 
 </beans>

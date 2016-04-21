@@ -12,5 +12,5 @@ public interface KeyGenerationService {
 
     String decrypt(String password, PrivateKey privatekey);
 
-    String hash(String password);
+    String encodeString(String password);
 }

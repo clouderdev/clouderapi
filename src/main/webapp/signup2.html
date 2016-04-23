@@ -1,0 +1,26 @@
+<html>
+<head>
+<title>Clouder</title>
+<script src="js/jquery-2.2.3.js"></script>
+<script src="js/security/jquery.jcryption-1.1.js"></script>
+<script src="js/util.js"></script>
+<script>
+  $(document).load(function() {
+    savePasswordFlow();
+  });
+</script>
+</head>
+<body>
+	<h2>Clouder</h2>
+	<div id="password-div">
+		<fieldset>
+			<legend>Password</legend>
+			<label>UserName:</label><input type="text" id="username" disabled /><br>
+			<label>Password:</label><input type="password" id="password" /><br>
+			<input type="button" id="savepassword" value="Save Password" /><br>
+			<span id="message"></span>
+		</fieldset>
+	</div>
+	<script src="js/signup.js"></script>
+</body>
+</html>

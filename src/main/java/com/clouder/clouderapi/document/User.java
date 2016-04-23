@@ -13,24 +13,24 @@ public class User {
 
     @Id
     @JsonIgnore
-    private String      id;
+    private String id;
 
-    private String      emailId;
+    private String emailId;
 
-    private String      firstName;
+    private String firstName;
 
-    private String      lastName;
+    private String lastName;
 
-    private String      username;
-
-    @JsonIgnore
-    private String      password;
+    private String username;
 
     @JsonIgnore
-    private String      publicKey;
+    private String password;
 
     @JsonIgnore
-    private String      privateKey;
+    private String publicKey;
+
+    @JsonIgnore
+    private String privateKey;
 
     private List<Cloud> clouds;
 

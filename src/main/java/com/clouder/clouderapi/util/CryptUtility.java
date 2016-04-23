@@ -23,9 +23,9 @@ public class CryptUtility {
 
     /**
      * Generates the {@link KeyPair} with the given keyLength.
-     * 
+     *
      * @param keyPairGenerator
-     * 
+     *
      * @param keyLength
      *            length of key
      * @return keyPair the keyPair generated
@@ -39,7 +39,7 @@ public class CryptUtility {
 
     /**
      * Decrypts a given string with the CRYPT_ALGO keys
-     * 
+     *
      * @param encrypted
      *            full encrypted text
      * @param keys
@@ -77,7 +77,7 @@ public class CryptUtility {
 
     /**
      * Return public CRYPT_ALGO key modulus
-     * 
+     *
      * @param keyPair
      *            CRYPT_ALGO keys
      * @return modulus value as hex string
@@ -89,7 +89,7 @@ public class CryptUtility {
 
     /**
      * Return public CRYPT_ALGO key exponent
-     * 
+     *
      * @param keyPair
      *            CRYPT_ALGO keys
      * @return public exponent value as hex string
@@ -101,7 +101,7 @@ public class CryptUtility {
 
     /**
      * Max block size with given key length
-     * 
+     *
      * @param keyLength
      *            length of key
      * @return number of digits
@@ -112,7 +112,7 @@ public class CryptUtility {
 
     /**
      * Convert byte array to hex string
-     * 
+     *
      * @param bytes
      *            input byte array
      * @return Hex string representation
@@ -127,7 +127,7 @@ public class CryptUtility {
 
     /**
      * Convert hex string to byte array
-     * 
+     *
      * @param data
      *            input string data
      * @return bytes

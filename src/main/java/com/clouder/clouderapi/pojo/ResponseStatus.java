@@ -4,8 +4,8 @@ import com.clouder.clouderapi.enums.ResponseType;
 
 public class ResponseStatus {
     ResponseType type;
-    int          code;
-    String       message;
+    int code;
+    String message;
 
     public ResponseStatus(ResponseType type, int code, String message) {
         super();

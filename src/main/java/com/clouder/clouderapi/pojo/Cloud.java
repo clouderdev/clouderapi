@@ -23,7 +23,7 @@ public abstract class Cloud {
 
     @JsonProperty("cloudType")
     @Field("cloudType")
-    public String    cloudTypeText;
+    public String cloudTypeText;
 
     public Cloud() {
     }

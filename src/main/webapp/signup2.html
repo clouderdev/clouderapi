@@ -4,11 +4,6 @@
 <script src="js/jquery-2.2.3.js"></script>
 <script src="js/security/jquery.jcryption-1.1.js"></script>
 <script src="js/util.js"></script>
-<script>
-  $(document).load(function() {
-    savePasswordFlow();
-  });
-</script>
 </head>
 <body>
 	<h2>Clouder</h2>
@@ -21,6 +16,11 @@
 			<span id="message"></span>
 		</fieldset>
 	</div>
-	<script src="js/signup.js"></script>
+	<script src="js/signup.js?temp=1"></script>
+	<script>
+    $(document).ready(function() {
+      savePasswordFlow();
+    });
+  </script>
 </body>
 </html>

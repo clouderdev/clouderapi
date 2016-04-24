@@ -9,6 +9,7 @@ $('#signup').click(function() {
     lastName: lastName,
     username: username
   });
+  localStorage.setItem('currentUser', signupData);
   ajax('api/signup', 'POST', signupData, 'application/json', toPasswordPage);
 });
 
@@ -24,5 +25,13 @@ function toPasswordPage(data) {
   }, 4000)
 }
 function savePasswordFlow() {
-  getPublicKey
+  var userData = localStorage.getItem('currentUser');
+  if (userData !== null) {
+    var username = JSON.parse(userData).username;
+    $('#username').val(username);
+  }
 }
+
+$('#savepassword').click(function() {
+  
+});

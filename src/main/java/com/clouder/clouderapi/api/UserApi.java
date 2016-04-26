@@ -37,26 +37,26 @@ public class UserApi {
      *            <b>Example JSON string: </b><br>
      *
      *            <pre>
-     *{
-     *    "emailId": "ssshukla1993@gmail.com",
-     *    "firstName": "Shriroop",
-     *    "lastName": "Joshi",
-     *    "username": "shrinivas93",
-     *    "password": "P@ssw0rd",
-     *    "clouds": [
-     *        {
-     *            "accessToken": "accessToken",
-     *            "refreshToken": "refreshToken",
-     *            "cloudType": "GOOGLEDRIVE"
-     *        },
-     *        {
-     *            "dropBoxAccessToken": "dropBoxAccessToken",
-     *            "dropboxRefreshToken": "dropBoxRefreshToken",
-     *            "cloudType": "DROPBOX"
-     *        }
-     *    ]
-     *}
-     *            </pre>
+     * {
+     *     "emailId": "ssshukla1993@gmail.com",
+     *     "firstName": "Shriroop",
+     *     "lastName": "Joshi",
+     *     "username": "shrinivas93",
+     *     "password": "P@ssw0rd",
+     *     "clouds": [
+     *         {
+     *             "accessToken": "accessToken",
+     *             "refreshToken": "refreshToken",
+     *             "cloudType": "GOOGLEDRIVE"
+     *         },
+     *         {
+     *             "dropBoxAccessToken": "dropBoxAccessToken",
+     *             "dropboxRefreshToken": "dropBoxRefreshToken",
+     *             "cloudType": "DROPBOX"
+     *         }
+     *     ]
+     * }
+     * </pre>
      *
      * @return
      */

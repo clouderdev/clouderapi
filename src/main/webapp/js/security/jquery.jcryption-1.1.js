@@ -35,12 +35,10 @@
         $(this).attr("disabled", true);
         if (base.options.beforeEncryption()) {
           $.jCryption.getKeys(base.options.getKeysURL, function(keys) {
-            $.jCryption.encrypt(base.$el.serialize(), keys,
-                    function(encrypted) {
-                      $encryptedElement.val(encrypted);
-                      $(base.$el).find(":input").attr("disabled", true).end()
-                              .append($encryptedElement).submit();
-                    });
+            $.jCryption.encrypt(base.$el.serialize(), keys, function(encrypted) {
+              $encryptedElement.val(encrypted);
+              $(base.$el).find(":input").attr("disabled", true).end().append($encryptedElement).submit();
+            });
           });
         }
         return false;
@@ -55,7 +53,7 @@
     var base = this;
     base.getKeys = function() {
       $.getJSON(url, function(data) {
-        keys = new base.jCryptionKeyPair(data.e, data.n, data.maxdigits);
+        keys = new base.jCryptionKeyPair(data.response.e, data.response.n, data.response.maxdigits);
         if ($.isFunction(callback)) {
           callback.call(this, keys);
         }
@@ -109,8 +107,7 @@
           block.digits[j] += encryptObject[k++] << 8;
         }
         var crypt = keyPair.barrett.powMod(block, keyPair.e);
-        var text = keyPair.radix == 16 ? biToHex(crypt) : biToString(crypt,
-                keyPair.radix);
+        var text = keyPair.radix == 16 ? biToHex(crypt) : biToString(crypt, keyPair.radix);
         encrypted += text + " ";
         charCounter += keyPair.chunkSize;
         if (charCounter < encryptObject.length) {
@@ -172,20 +169,16 @@ var maxDigits;
 var ZERO_ARRAY;
 var bigZero, bigOne;
 var dpl10 = 15;
-var highBitMasks = new Array(0x0000, 0x8000, 0xC000, 0xE000, 0xF000, 0xF800,
-        0xFC00, 0xFE00, 0xFF00, 0xFF80, 0xFFC0, 0xFFE0, 0xFFF0, 0xFFF8, 0xFFFC,
-        0xFFFE, 0xFFFF);
+var highBitMasks = new Array(0x0000, 0x8000, 0xC000, 0xE000, 0xF000, 0xF800, 0xFC00, 0xFE00, 0xFF00, 0xFF80, 0xFFC0, 0xFFE0, 0xFFF0, 0xFFF8, 0xFFFC, 0xFFFE,
+        0xFFFF);
 
-var hexatrigesimalToChar = new Array('0', '1', '2', '3', '4', '5', '6', '7',
-        '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
-        'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z');
+var hexatrigesimalToChar = new Array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
+        'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z');
 
-var hexToChar = new Array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-        'a', 'b', 'c', 'd', 'e', 'f');
+var hexToChar = new Array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f');
 
-var lowBitMasks = new Array(0x0000, 0x0001, 0x0003, 0x0007, 0x000F, 0x001F,
-        0x003F, 0x007F, 0x00FF, 0x01FF, 0x03FF, 0x07FF, 0x0FFF, 0x1FFF, 0x3FFF,
-        0x7FFF, 0xFFFF);
+var lowBitMasks = new Array(0x0000, 0x0001, 0x0003, 0x0007, 0x000F, 0x001F, 0x003F, 0x007F, 0x00FF, 0x01FF, 0x03FF, 0x07FF, 0x0FFF, 0x1FFF, 0x3FFF, 0x7FFF,
+        0xFFFF);
 
 function setMaxDigits(value) {
   maxDigits = value;
@@ -221,8 +214,7 @@ function biFromDecimal(s) {
     result = biFromNumber(Number(s.substr(i, fgl)));
     i += fgl;
     while (i < s.length) {
-      result = biAdd(biMultiply(result, biFromNumber(1000000000000000)),
-              biFromNumber(Number(s.substr(i, dpl10))));
+      result = biAdd(biMultiply(result, biFromNumber(1000000000000000)), biFromNumber(Number(s.substr(i, dpl10))));
       i += dpl10;
     }
     result.isNeg = isNeg;
@@ -480,13 +472,11 @@ function arrayCopy(src, srcStart, dest, destStart, n) {
 function biShiftLeft(x, n) {
   var digitCount = Math.floor(n / bitsPerDigit);
   var result = new BigInt();
-  arrayCopy(x.digits, 0, result.digits, digitCount, result.digits.length
-          - digitCount);
+  arrayCopy(x.digits, 0, result.digits, digitCount, result.digits.length - digitCount);
   var bits = n % bitsPerDigit;
   var rightBits = bitsPerDigit - bits;
   for (var i = result.digits.length - 1, i1 = i - 1; i > 0; --i, --i1) {
-    result.digits[i] = ((result.digits[i] << bits) & maxDigitVal)
-            | ((result.digits[i1] & highBitMasks[bits]) >>> (rightBits));
+    result.digits[i] = ((result.digits[i] << bits) & maxDigitVal) | ((result.digits[i1] & highBitMasks[bits]) >>> (rightBits));
   }
   result.digits[0] = ((result.digits[i] << bits) & maxDigitVal);
   result.isNeg = x.isNeg;
@@ -496,13 +486,11 @@ function biShiftLeft(x, n) {
 function biShiftRight(x, n) {
   var digitCount = Math.floor(n / bitsPerDigit);
   var result = new BigInt();
-  arrayCopy(x.digits, digitCount, result.digits, 0, x.digits.length
-          - digitCount);
+  arrayCopy(x.digits, digitCount, result.digits, 0, x.digits.length - digitCount);
   var bits = n % bitsPerDigit;
   var leftBits = bitsPerDigit - bits;
   for (var i = 0, i1 = i + 1; i < result.digits.length - 1; ++i, ++i1) {
-    result.digits[i] = (result.digits[i] >>> bits)
-            | ((result.digits[i1] & lowBitMasks[bits]) << leftBits);
+    result.digits[i] = (result.digits[i] >>> bits) | ((result.digits[i1] & lowBitMasks[bits]) << leftBits);
   }
   result.digits[result.digits.length - 1] >>>= bits;
   result.isNeg = x.isNeg;

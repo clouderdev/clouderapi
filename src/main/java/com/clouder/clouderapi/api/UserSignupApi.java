@@ -44,7 +44,7 @@ public class UserSignupApi {
     public Response savePassword(String json) throws MessagingException {
         User user = userService.savePassword(json);
         if (user != null) {
-            return responseService.getSuccessResponse("Password saved", Status.CREATED.getStatusCode());
+            return responseService.getSuccessResponse("Password saved", Status.OK.getStatusCode());
         } else {
             return responseService.getErrorResponse("Unable to save password",
                     Status.INTERNAL_SERVER_ERROR.getStatusCode());

@@ -16,4 +16,6 @@ public interface UserService {
     User saveUser(User user);
 
     User savePassword(String json) throws MessagingException;
+
+    boolean verifyUser(String username, String key);
 }

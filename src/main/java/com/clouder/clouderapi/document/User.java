@@ -34,11 +34,14 @@ public class User {
 
     private List<Cloud> clouds;
 
+    private boolean isVerified;
+
     public User() {
         // Default constructor for Jackson
     }
 
-    public User(String emailId, String firstName, String lastName, String username, String password, List<Cloud> clouds) {
+    public User(String emailId, String firstName, String lastName, String username, String password,
+            List<Cloud> clouds) {
         super();
         this.emailId = emailId;
         this.firstName = firstName;
@@ -120,11 +123,19 @@ public class User {
         this.privateKey = privateKey;
     }
 
+    public boolean isVerified() {
+        return isVerified;
+    }
+
+    public void setVerified(boolean isVerified) {
+        this.isVerified = isVerified;
+    }
+
     @Override
     public String toString() {
         return "User [id=" + id + ", emailId=" + emailId + ", firstName=" + firstName + ", lastName=" + lastName
                 + ", username=" + username + ", password=" + password + ", publicKey=" + publicKey + ", privateKey="
-                + privateKey + ", clouds=" + clouds + "]";
+                + privateKey + ", clouds=" + clouds + ", isVerified=" + isVerified + "]";
     }
 
 }

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.clouder.clouderapi.document.User;
 import com.clouder.clouderapi.dto.UsernamePasswordDTO;
+import com.clouder.clouderapi.pojo.Constants;
 import com.clouder.clouderapi.repository.UserRepository;
 import com.clouder.clouderapi.service.EmailService;
 import com.clouder.clouderapi.service.KeyGenerationService;
@@ -75,9 +76,28 @@ public class UserServiceImpl implements UserService {
     }
 
     private String getEmailLink(String username) {
-        String currentTimeEncoded = new String(Base64.encodeBase64(String.valueOf(System.currentTimeMillis()).getBytes(
-                StandardCharsets.UTF_8)));
-        return baseUrl + "verifyemail?username=" + username + "&key=" + currentTimeEncoded;
+        String currentTimeEncoded = new String(
+                Base64.encodeBase64(String.valueOf(System.currentTimeMillis()).getBytes(StandardCharsets.UTF_8)));
+        return baseUrl + "user/verifyemail?username=" + username + "&key=" + currentTimeEncoded;
+    }
+
+    @Override
+    public boolean verifyUser(String username, String key) {
+        try {
+            long timestamp = Long.parseLong(new String(Base64.decodeBase64(key)));
+            if (System.currentTimeMillis() - timestamp > Constants.TIMEOUT_MINUTES * 60 * 1000) {
+                return false;
+            }
+            User user = userRepository.findByUsername(username);
+            if (user == null) {
+                return false;
+            }
+            user.setVerified(true);
+            userRepository.save(user);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
 }

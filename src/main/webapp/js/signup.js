@@ -1,10 +1,17 @@
+var emailId;
+var firstName;
+var lastName;
+var username;
+var password;
+var signupData;
+
 $('#signup').click(function() {
-  var emailId = $('#emailid').val();
-  var firstName = $('#firstname').val();
-  var lastName = $('#lastname').val();
-  var username = $('#username').val();
-  var password = $('#password').val();
-  var signupData = JSON.stringify({
+  emailId = $('#emailid').val();
+  firstName = $('#firstname').val();
+  lastName = $('#lastname').val();
+  username = $('#username').val();
+  password = $('#password').val();
+  signupData = JSON.stringify({
     emailId: emailId,
     firstName: firstName,
     lastName: lastName,

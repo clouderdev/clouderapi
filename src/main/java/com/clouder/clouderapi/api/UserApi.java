@@ -7,6 +7,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -56,7 +57,7 @@ public class UserApi {
      *         }
      *     ]
      * }
-     * </pre>
+     *            </pre>
      *
      * @return
      */
@@ -70,6 +71,13 @@ public class UserApi {
     public Response getUsers() {
         List<User> users = userService.getUsers();
         return responseService.getSuccessResponse(users, "List of all users", Status.OK.getStatusCode());
+    }
+
+    @GET
+    @Path("verifyemail")
+    public Response verifyUser(@QueryParam("username") String username, @QueryParam("key") String key) {
+        boolean isVerified = userService.verifyUser(username, key);
+        return responseService.getSuccessResponse(isVerified, "User verfied", Status.OK.getStatusCode());
     }
 
 }

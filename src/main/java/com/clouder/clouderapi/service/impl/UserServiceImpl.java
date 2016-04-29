@@ -100,4 +100,26 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public String login(String json) {
+        UsernamePasswordDTO usernamePasswordDTO = jsonUtility.toObject(json, UsernamePasswordDTO.class);
+        String username = usernamePasswordDTO.getUsername();
+        User user = userRepository.findByUsername(username);
+        PrivateKey privateKey = keyGenerationService.getPrivateKeyFromBase64(user.getPrivateKey());
+        String password = keyGenerationService.decrypt(usernamePasswordDTO.getPassword(), privateKey);
+        String encodedPassword = keyGenerationService.encodeString(password);
+        if (user.getPassword().equals(encodedPassword)) {
+            long timestamp = System.currentTimeMillis();
+            String combination = username + "@" + timestamp;
+            return keyGenerationService.encodeString(combination);
+        }
+        return null;
+    }
+
+    @Override
+    public User getUserFromToken(String token) {
+        String username = keyGenerationService.decodeString(token).split("@")[0];
+        return userRepository.findByUsername(username);
+    }
+
 }

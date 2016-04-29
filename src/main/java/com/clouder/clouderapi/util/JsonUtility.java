@@ -20,8 +20,8 @@ public class JsonUtility {
         try {
             json = objectMapper.writeValueAsString(object);
         } catch (IOException e) {
-            throw new JsonWriterException("Error in converting object of class " + object.getClass().getName()
-                    + " to JSON string", e);
+            throw new JsonWriterException(
+                    "Error in converting object of class " + object.getClass().getName() + " to JSON string", e);
         }
         return json;
     }
@@ -31,8 +31,8 @@ public class JsonUtility {
         try {
             object = objectMapper.readValue(json, objectClass);
         } catch (IOException e) {
-            throw new JsonReaderException(
-                    "Error in converting JSON string to object of class " + objectClass.getName(), e);
+            throw new JsonReaderException("Error in converting JSON string to object of class " + objectClass.getName(),
+                    e);
         }
         return object;
     }

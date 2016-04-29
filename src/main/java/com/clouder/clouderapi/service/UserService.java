@@ -18,4 +18,8 @@ public interface UserService {
     User savePassword(String json) throws MessagingException;
 
     boolean verifyUser(String username, String key);
+
+    String login(String json);
+
+    User getUserFromToken(String token);
 }

@@ -109,4 +109,9 @@ public class KeyGenerationServiceImpl implements KeyGenerationService {
         return getBase64(password.getBytes(StandardCharsets.UTF_8));
     }
 
+    @Override
+    public String decodeString(String password) {
+        return new String(Base64.decodeBase64(password));
+    }
+
 }

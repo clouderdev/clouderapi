@@ -5,6 +5,8 @@ import java.security.PrivateKey;
 import java.util.List;
 
 import javax.mail.MessagingException;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response.Status;
 
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,19 +26,19 @@ import com.clouder.clouderapi.util.JsonUtility;
 public class UserServiceImpl implements UserService {
 
     @Value("${base.url}")
-    String baseUrl;
+    String               baseUrl;
 
     @Autowired
-    UserRepository userRepository;
+    UserRepository       userRepository;
 
     @Autowired
-    JsonUtility jsonUtility;
+    JsonUtility          jsonUtility;
 
     @Autowired
     KeyGenerationService keyGenerationService;
 
     @Autowired
-    EmailService emailService;
+    EmailService         emailService;
 
     @Override
     public User saveUser(String json) {
@@ -70,6 +72,7 @@ public class UserServiceImpl implements UserService {
         dbUser.setPassword(passwordHash);
         User user = userRepository.save(dbUser);
         String emailLink = getEmailLink(dbUser.getUsername());
+        System.out.println("EMAIL LINK: " + emailLink);
         emailService.sendEmail(dbUser.getEmailId(), null, "Email Verification",
                 "Click on the following link to verify your email account<br>" + emailLink);
         return user;
@@ -118,7 +121,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserFromToken(String token) {
-        String username = keyGenerationService.decodeString(token).split("@")[0];
+        String[] params = keyGenerationService.decodeString(token).split("@");
+        String username = params[0];
+        long currentTimeMillis = System.currentTimeMillis();
+        long timestamp;
+        try {
+            timestamp = Long.parseLong(params[1]);
+        } catch (NumberFormatException ex) {
+            throw new WebApplicationException("Unable to parse to timestamp", ex, Status.BAD_REQUEST);
+        }
+        if (currentTimeMillis - timestamp > Constants.TIMEOUT_MINUTES * 60 * 1000) {
+            throw new UnsupportedOperationException();
+        }
+
         return userRepository.findByUsername(username);
     }
 

@@ -26,7 +26,7 @@ public class SampleToken {
     private ResponseService responseService;
 
     @Autowired
-    private UserService userService;
+    private UserService     userService;
 
     @GET
     public Response getUserFromToken(@QueryParam("token") String token) {

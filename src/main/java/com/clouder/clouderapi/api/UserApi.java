@@ -29,7 +29,7 @@ public class UserApi {
     private ResponseService responseService;
 
     @Autowired
-    private UserService userService;
+    private UserService     userService;
 
     /**
      *

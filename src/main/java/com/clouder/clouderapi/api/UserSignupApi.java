@@ -26,7 +26,7 @@ public class UserSignupApi {
     private ResponseService responseService;
 
     @Autowired
-    private UserService userService;
+    private UserService     userService;
 
     @POST
     public Response signup(String json) {

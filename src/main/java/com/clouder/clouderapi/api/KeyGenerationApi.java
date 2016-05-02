@@ -26,7 +26,7 @@ import com.clouder.clouderapi.service.ResponseService;
 public class KeyGenerationApi {
 
     @Autowired
-    private ResponseService responseService;
+    private ResponseService      responseService;
 
     @Autowired
     private KeyGenerationService keyGenerationService;

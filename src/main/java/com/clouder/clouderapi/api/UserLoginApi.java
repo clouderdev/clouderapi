@@ -23,7 +23,7 @@ public class UserLoginApi {
     private ResponseService responseService;
 
     @Autowired
-    private UserService userService;
+    private UserService     userService;
 
     @POST
     public Response login(String json) {

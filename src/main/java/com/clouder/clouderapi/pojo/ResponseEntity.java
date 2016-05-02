@@ -1,7 +1,7 @@
 package com.clouder.clouderapi.pojo;
 
 public class ResponseEntity {
-    Object response;
+    Object         response;
     ResponseStatus status;
 
     public ResponseEntity(Object response, ResponseStatus status) {

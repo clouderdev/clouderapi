@@ -1,8 +1,9 @@
 package com.clouder.clouderapi.pojo;
 
 public class ResponseEntity {
-    Object         response;
-    ResponseStatus status;
+    private Object         response;
+    private ResponseStatus status;
+    private String token;
 
     public ResponseEntity(Object response, ResponseStatus status) {
         super();
@@ -26,9 +27,17 @@ public class ResponseEntity {
         this.status = status;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     @Override
     public String toString() {
-        return "ResponseEntity [response=" + response + ", status=" + status + "]";
+        return "ResponseEntity [response=" + response + ", status=" + status + ", token=" + token + "]";
     }
 
 }

@@ -7,6 +7,9 @@ public class ResponseStatus {
     int          code;
     String       message;
 
+    public ResponseStatus() {
+    }
+
     public ResponseStatus(ResponseType type, int code, String message) {
         super();
         this.type = type;

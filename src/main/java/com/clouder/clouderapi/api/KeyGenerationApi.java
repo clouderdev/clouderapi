@@ -19,7 +19,7 @@ import com.clouder.clouderapi.exception.ClouderException;
 import com.clouder.clouderapi.service.KeyGenerationService;
 import com.clouder.clouderapi.service.ResponseService;
 
-@Path("key")
+@Path("public/key")
 @Component
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)

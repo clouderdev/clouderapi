@@ -2,6 +2,7 @@ package com.clouder.clouderapi.service.impl;
 
 import java.nio.charset.StandardCharsets;
 import java.security.PrivateKey;
+import java.util.Date;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -130,6 +131,7 @@ public class UserServiceImpl implements UserService {
         } catch (NumberFormatException ex) {
             throw new WebApplicationException("Unable to parse to timestamp", ex, Status.BAD_REQUEST);
         }
+        System.out.println("curr:" + new Date(currentTimeMillis) + "\nts:" + new Date(timestamp));
         if (currentTimeMillis - timestamp > Constants.TIMEOUT_MINUTES * 60 * 1000) {
             throw new UnsupportedOperationException();
         }

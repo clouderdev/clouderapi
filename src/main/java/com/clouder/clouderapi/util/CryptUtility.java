@@ -55,7 +55,7 @@ public class CryptUtility {
             dec = Cipher.getInstance(Constants.CRYPT_ALGO_TRANSFORMATION);
             dec.init(Cipher.DECRYPT_MODE, privateKey);
         } catch (GeneralSecurityException e) {
-            throw new ClouderException("CRYPT_ALGO algorithm not supported", e);
+            throw new ClouderException(Constants.CRYPT_ALGO_TRANSFORMATION + " algorithm not supported", e);
         }
         String[] blocks = encrypted.split("\\s");
         StringBuilder result = new StringBuilder();

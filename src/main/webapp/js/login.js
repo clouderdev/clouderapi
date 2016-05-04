@@ -5,14 +5,14 @@ $('#login').click(function() {
   username = $('#username').val();
   password = $('#password').val();
 
-  $.jCryption.getKeys('api/key?username=' + username, function(keys) {
+  $.jCryption.getKeys('api/public/key?username=' + username, function(keys) {
     $.jCryption.encrypt(password, keys, function(encryptedPassword) {
       var loginData = {
         username: username,
         password: encryptedPassword
       };
       $.ajax({
-        url: 'api/login',
+        url: 'api/public/login',
         method: 'POST',
         data: JSON.stringify(loginData),
         contentType: 'application/json',

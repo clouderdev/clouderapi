@@ -28,14 +28,18 @@ public class RequestFilter implements ContainerRequestFilter {
     @Override
     public void filter(ContainerRequestContext containerRequest) throws IOException {
         UriInfo uriInfo = containerRequest.getUriInfo();
-        String token = containerRequest.getHeaderString(Constants.AUTH_HEADER);
-        System.out.println(token);
-        User user = userService.getUserFromToken(token);
-        if (user == null) {
-            throw new WebApplicationException("User kadya kar raha", Status.UNAUTHORIZED);
+        System.out.println("ABS:" + uriInfo.getAbsolutePath() + "\nREQ:" + uriInfo.getRequestUri() + "\nBASE:"
+                + uriInfo.getBaseUri() + "\nPATH:" + uriInfo.getPath());
+        if (!uriInfo.getPath().startsWith("public")) {
+            String token = containerRequest.getHeaderString(Constants.AUTH_HEADER);
+            System.out.println(token);
+            User user = userService.getUserFromToken(token);
+            if (user == null) {
+                throw new WebApplicationException("User kadya kar raha", Status.UNAUTHORIZED);
+            }
+            URI uri = UriBuilder.fromUri(uriInfo.getRequestUri()).queryParam("token", token).build();
+            containerRequest.setRequestUri(uri);
         }
-        URI uri = UriBuilder.fromUri(uriInfo.getRequestUri()).queryParam("token", token).build();
-        containerRequest.setRequestUri(uri);
     }
 
 }

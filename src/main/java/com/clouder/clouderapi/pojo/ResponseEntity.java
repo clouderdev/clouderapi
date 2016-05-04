@@ -3,7 +3,10 @@ package com.clouder.clouderapi.pojo;
 public class ResponseEntity {
     private Object         response;
     private ResponseStatus status;
-    private String token;
+    private String         token;
+
+    public ResponseEntity() {
+    }
 
     public ResponseEntity(Object response, ResponseStatus status) {
         super();

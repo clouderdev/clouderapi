@@ -16,11 +16,11 @@ import com.clouder.clouderapi.document.User;
 import com.clouder.clouderapi.service.ResponseService;
 import com.clouder.clouderapi.service.UserService;
 
-@Path("sample")
+@Path("auth/cloud")
 @Component
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class SampleToken {
+public class AuthenticateUserCloudApi {
 
     @Autowired
     private ResponseService responseService;
@@ -29,9 +29,10 @@ public class SampleToken {
     private UserService     userService;
 
     @GET
-    public Response getUserFromToken(@QueryParam("username") String username) {
-        User user = userService.findByUsername(username);
-        return responseService.getSuccessResponse(user, "User: " + user.getUsername(), Status.OK.getStatusCode());
+    @Path("onedrive")
+    public Response authenticateOneDrive(@QueryParam("code") String token) {
+        User user = userService.getUserFromToken(token);
+        return responseService.getSuccessResponse(user, "User with token = " + token, Status.OK.getStatusCode());
     }
 
 }

@@ -12,6 +12,8 @@ import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.ext.Provider;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.clouder.clouderapi.document.User;
@@ -21,6 +23,8 @@ import com.clouder.clouderapi.service.UserService;
 @Provider
 @PreMatching
 public class RequestFilter implements ContainerRequestFilter {
+    
+    private static final Logger LOGGER = LogManager.getLogger(RequestFilter.class.getName());
 
     @Autowired
     private UserService userService;
@@ -28,16 +32,16 @@ public class RequestFilter implements ContainerRequestFilter {
     @Override
     public void filter(ContainerRequestContext containerRequest) throws IOException {
         UriInfo uriInfo = containerRequest.getUriInfo();
-        System.out.println("ABS:" + uriInfo.getAbsolutePath() + "\nREQ:" + uriInfo.getRequestUri() + "\nBASE:"
+        LOGGER.info("ABS:" + uriInfo.getAbsolutePath() + "\nREQ:" + uriInfo.getRequestUri() + "\nBASE:"
                 + uriInfo.getBaseUri() + "\nPATH:" + uriInfo.getPath());
         if (!uriInfo.getPath().startsWith("public")) {
             String token = containerRequest.getHeaderString(Constants.AUTH_HEADER);
-            System.out.println(token);
+            LOGGER.info(token);
             User user = userService.getUserFromToken(token);
             if (user == null) {
                 throw new WebApplicationException("User kadya kar raha", Status.UNAUTHORIZED);
             }
-            URI uri = UriBuilder.fromUri(uriInfo.getRequestUri()).queryParam("token", token).build();
+            URI uri = UriBuilder.fromUri(uriInfo.getRequestUri()).queryParam("username", user.getUsername()).build();
             containerRequest.setRequestUri(uri);
         }
     }

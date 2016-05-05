@@ -19,6 +19,8 @@ $('#login').click(function() {
         success: function(data) {
           if (data.status.code = 200) {
             console.log(data.response);
+            localStorage.setItem('key', data.response);
+            location.href='home.html';
           }
         }
       });

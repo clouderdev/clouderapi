@@ -18,20 +18,20 @@ $('#signup').click(function() {
     username: username
   });
   $.ajax({
-    url: 'api/signup',
+    url: 'api/public/signup',
     method: 'POST',
     data: signupData,
     contentType: 'application/json',
     success: function(data) {
       if (data.status.code === 201) {
-        $.jCryption.getKeys('api/key?username=' + username, function(keys) {
+        $.jCryption.getKeys('api/public/key?username=' + username, function(keys) {
           $.jCryption.encrypt(password, keys, function(encryptedPassword) {
             var passwdData = {
               username: username,
               password: encryptedPassword
             };
             $.ajax({
-              url: 'api/signup/password',
+              url: 'api/public/signup/password',
               method: 'POST',
               data: JSON.stringify(passwdData),
               contentType: 'application/json',

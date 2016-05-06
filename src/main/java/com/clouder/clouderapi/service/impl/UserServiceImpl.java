@@ -105,7 +105,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String login(String json) {
+    public User login(String json) {
         UsernamePasswordDTO usernamePasswordDTO = jsonUtility.toObject(json, UsernamePasswordDTO.class);
         String username = usernamePasswordDTO.getUsername();
         User user = userRepository.findByUsername(username);
@@ -113,9 +113,7 @@ public class UserServiceImpl implements UserService {
         String password = keyGenerationService.decrypt(usernamePasswordDTO.getPassword(), privateKey);
         String encodedPassword = keyGenerationService.encodeString(password);
         if (user.getPassword().equals(encodedPassword)) {
-            long timestamp = System.currentTimeMillis();
-            String combination = username + "@" + timestamp;
-            return keyGenerationService.encodeString(combination);
+            return user;
         }
         return null;
     }

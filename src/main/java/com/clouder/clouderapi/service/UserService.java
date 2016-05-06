@@ -19,7 +19,7 @@ public interface UserService {
 
     boolean verifyUser(String username, String key);
 
-    String login(String json);
+    User login(String json);
 
     User getUserFromToken(String token);
 }

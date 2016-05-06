@@ -19,7 +19,7 @@ import com.clouder.clouderapi.service.KeyGenerationService;
 import com.clouder.clouderapi.service.UserService;
 import com.clouder.clouderapi.util.JsonUtility;
 
-@Provider
+//@Provider
 public class ResponseFilter implements ContainerResponseFilter {
 
     @Autowired

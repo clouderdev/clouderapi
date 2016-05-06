@@ -1,10 +1,11 @@
 package com.clouder.clouderapi.api;
 
-import javax.ws.rs.Consumes;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -12,26 +13,27 @@ import javax.ws.rs.core.Response.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.clouder.clouderapi.document.User;
 import com.clouder.clouderapi.service.ResponseService;
 import com.clouder.clouderapi.service.UserService;
 
 @Path("sample")
 @Component
 @Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
+// @Consumes(MediaType.APPLICATION_JSON)
 public class SampleToken {
 
     @Autowired
     private ResponseService responseService;
 
     @Autowired
-    private UserService     userService;
+    private UserService userService;
+
+    @Context
+    private HttpServletRequest servletRequest;
 
     @GET
     public Response getUserFromToken(@QueryParam("username") String username) {
-        User user = userService.findByUsername(username);
-        return responseService.getSuccessResponse(user, "User: " + user.getUsername(), Status.OK.getStatusCode());
+        return responseService.getSuccessResponse(username, "User: " + username, Status.OK.getStatusCode());
     }
 
 }

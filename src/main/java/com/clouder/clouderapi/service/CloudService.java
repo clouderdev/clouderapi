@@ -4,6 +4,6 @@ import com.clouder.clouderapi.pojo.Cloud;
 
 public interface CloudService {
 
-    Cloud addCloud(String username, String... codes);
+    Cloud addCloud(String username, String codes);
 
 }

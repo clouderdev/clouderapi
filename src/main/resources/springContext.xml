@@ -16,6 +16,7 @@
 				<value>classpath:application.properties</value>
 				<value>classpath:email.properties</value>
 				<value>classpath:admin.properties</value>
+				<value>classpath:cloud.properties</value>
 			</list>
 		</property>
 	</bean>

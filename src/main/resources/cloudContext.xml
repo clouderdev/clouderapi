@@ -9,9 +9,23 @@
 	http://www.springframework.org/schema/data/mongo
     http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
 
-	<import resource="springContext.xml" />
-	<import resource="mongoContext.xml" />
-	<import resource="beanContext.xml" />
-	<import resource="cloudContext.xml" />
+	<bean id="dbxAppInfo" class="com.dropbox.core.DbxAppInfo">
+		<constructor-arg value="${dropbox.appkey}" />
+		<constructor-arg value="${dropbox.appsecret}" />
+	</bean>
+
+	<bean id="dbxRequestConfig" class="com.dropbox.core.DbxRequestConfig">
+		<constructor-arg value="${dropbox.clientIdentifier}" />
+		<constructor-arg value="${userLocale}" />
+	</bean>
+
+	<bean id="dbxWebAuth" class="com.dropbox.core.DbxWebAuth">
+		<constructor-arg ref="dbxRequestConfig" />
+		<constructor-arg ref="dbxAppInfo" />
+		<constructor-arg value="{dropbox.redirectUri}" />
+		<constructor-arg>
+			<null />
+		</constructor-arg>
+	</bean>
 
 </beans>

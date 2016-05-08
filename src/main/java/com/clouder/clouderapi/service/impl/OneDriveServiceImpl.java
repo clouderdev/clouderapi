@@ -8,15 +8,15 @@ import com.clouder.clouderapi.pojo.Cloud;
 import com.clouder.clouderapi.service.CloudService;
 import com.clouder.clouderapi.service.UserService;
 
-@Service
+@Service("onedrive")
 public class OneDriveServiceImpl implements CloudService {
 
     @Autowired
     private UserService userService;
 
     @Override
-    public Cloud addCloud(String username, String... codes) {
-        // TODO Auto-generated method stub
+    public Cloud addCloud(String username, String codes) {
+        System.out.println("OneDrive" + username);
         return null;
     }
 

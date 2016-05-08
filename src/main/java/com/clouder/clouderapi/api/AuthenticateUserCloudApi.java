@@ -10,9 +10,11 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import com.clouder.clouderapi.document.User;
+import com.clouder.clouderapi.service.CloudService;
 import com.clouder.clouderapi.service.ResponseService;
 import com.clouder.clouderapi.service.UserService;
 
@@ -26,13 +28,24 @@ public class AuthenticateUserCloudApi {
     private ResponseService responseService;
 
     @Autowired
-    private UserService     userService;
+    private UserService userService;
+
+    @Autowired
+    @Qualifier("dropbox")
+    CloudService dropboxService;
 
     @GET
     @Path("onedrive")
     public Response authenticateOneDrive(@QueryParam("code") String token) {
         User user = userService.getUserFromToken(token);
         return responseService.getSuccessResponse(user, "User with token = " + token, Status.OK.getStatusCode());
+    }
+
+    @GET
+    @Path("dropbox")
+    public Response authenticateDropbox(@QueryParam("username") String username, @QueryParam("code") String code) {
+        dropboxService.addCloud(username, code);
+        return responseService.getSuccessResponse(code, 200);
     }
 
 }

@@ -12,8 +12,8 @@ public class OneDrive extends Cloud {
         super(CloudType.ONEDRIVE);
     }
 
-    public OneDrive(String accessToken, String refreshToken) {
-        super(CloudType.ONEDRIVE);
+    public OneDrive(String email, String accessToken, String refreshToken) {
+        super(CloudType.ONEDRIVE, email);
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
     }

@@ -27,19 +27,19 @@ import com.clouder.clouderapi.util.JsonUtility;
 public class UserServiceImpl implements UserService {
 
     @Value("${base.url}")
-    String               baseUrl;
+    String baseUrl;
 
     @Autowired
-    UserRepository       userRepository;
+    UserRepository userRepository;
 
     @Autowired
-    JsonUtility          jsonUtility;
+    JsonUtility jsonUtility;
 
     @Autowired
     KeyGenerationService keyGenerationService;
 
     @Autowired
-    EmailService         emailService;
+    EmailService emailService;
 
     @Override
     public User saveUser(String json) {

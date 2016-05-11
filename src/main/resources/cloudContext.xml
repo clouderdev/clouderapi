@@ -19,13 +19,4 @@
 		<constructor-arg value="${userLocale}" />
 	</bean>
 
-	<bean id="dbxWebAuth" class="com.dropbox.core.DbxWebAuth">
-		<constructor-arg ref="dbxRequestConfig" />
-		<constructor-arg ref="dbxAppInfo" />
-		<constructor-arg value="{dropbox.redirectUri}" />
-		<constructor-arg>
-			<null />
-		</constructor-arg>
-	</bean>
-
 </beans>

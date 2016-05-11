@@ -1,5 +1,8 @@
 package com.clouder.clouderapi.service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.core.Context;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = { "classpath:applicationContext.xml" })
 public class CloudServiceTest {
 
+    @Context
+    HttpServletRequest servletRequest;
+
     @Qualifier("onedrive")
     @Autowired
     CloudService oneDriveService;
@@ -21,8 +27,8 @@ public class CloudServiceTest {
 
     @Test
     public void testAddCloud() {
-        oneDriveService.addCloud("shrinivas93", null);
-        dropboxService.addCloud("shrinivas93", null);
+        oneDriveService.addCloud(servletRequest, "shrinivas93");
+        dropboxService.addCloud(servletRequest, "shrinivas93");
     }
 
 }

@@ -12,8 +12,8 @@ public class DropBox extends Cloud {
         super(CloudType.DROPBOX);
     }
 
-    public DropBox(String dropBoxAccessToken, String dropboxRefreshToken) {
-        super(CloudType.DROPBOX);
+    public DropBox(String email, String dropBoxAccessToken, String dropboxRefreshToken) {
+        super(CloudType.DROPBOX, email);
         this.dropBoxAccessToken = dropBoxAccessToken;
         this.dropboxRefreshToken = dropboxRefreshToken;
     }

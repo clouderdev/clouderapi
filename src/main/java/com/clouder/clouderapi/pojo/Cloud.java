@@ -19,11 +19,13 @@ public abstract class Cloud {
 
     @Transient
     @JsonIgnore
-    public CloudType cloudType;
+    private CloudType cloudType;
 
     @JsonProperty("cloudType")
     @Field("cloudType")
-    public String    cloudTypeText;
+    private String cloudTypeText;
+
+    private String email;
 
     public Cloud() {
     }
@@ -32,6 +34,21 @@ public abstract class Cloud {
         super();
         this.cloudType = cloudType;
         this.cloudTypeText = cloudType.name();
+    }
+
+    public Cloud(CloudType cloudType, String email) {
+        super();
+        this.email = email;
+        this.cloudType = cloudType;
+        this.cloudTypeText = cloudType.name();
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public CloudType getCloudType() {
@@ -54,7 +71,7 @@ public abstract class Cloud {
 
     @Override
     public String toString() {
-        return "Cloud [cloudType=" + cloudType + ", cloudTypeText=" + cloudTypeText + "]";
+        return "Cloud [cloudType=" + cloudType + ", cloudTypeText=" + cloudTypeText + ", email=" + email + "]";
     }
 
 }

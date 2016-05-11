@@ -1,5 +1,6 @@
 package com.clouder.clouderapi.document;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
@@ -13,28 +14,28 @@ public class User {
 
     @Id
     @JsonIgnore
-    private String      id;
+    private String id;
 
-    private String      emailId;
+    private String emailId;
 
-    private String      firstName;
+    private String firstName;
 
-    private String      lastName;
+    private String lastName;
 
-    private String      username;
-
-    @JsonIgnore
-    private String      password;
+    private String username;
 
     @JsonIgnore
-    private String      publicKey;
+    private String password;
 
     @JsonIgnore
-    private String      privateKey;
+    private String publicKey;
+
+    @JsonIgnore
+    private String privateKey;
 
     private List<Cloud> clouds;
 
-    private boolean     isVerified;
+    private boolean isVerified;
 
     public User() {
         // Default constructor for Jackson
@@ -105,6 +106,13 @@ public class User {
 
     public void setClouds(List<Cloud> clouds) {
         this.clouds = clouds;
+    }
+
+    public boolean addCloud(Cloud cloud) {
+        if (clouds == null) {
+            clouds = new ArrayList<>();
+        }
+        return clouds.add(cloud);
     }
 
     public String getPublicKey() {

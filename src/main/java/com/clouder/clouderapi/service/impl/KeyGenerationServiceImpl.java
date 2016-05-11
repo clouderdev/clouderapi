@@ -27,19 +27,19 @@ import com.clouder.clouderapi.util.CryptUtility;
 public class KeyGenerationServiceImpl implements KeyGenerationService {
 
     @Autowired
-    private SecureRandom     secureRandom;
+    private SecureRandom secureRandom;
 
     @Autowired
     private KeyPairGenerator keyPairGenerator;
 
     @Autowired
-    private KeyFactory       keyFactory;
+    private KeyFactory keyFactory;
 
     @Autowired
-    private UserService      userService;
+    private UserService userService;
 
     @Autowired
-    private CryptUtility     cryptUtility;
+    private CryptUtility cryptUtility;
 
     private String getBase64PrivateKey(KeyPair keyPair) {
         return getBase64(keyPair.getPrivate().getEncoded());

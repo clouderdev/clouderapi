@@ -20,25 +20,25 @@ import com.clouder.clouderapi.service.EmailService;
 public class EmailServiceImpl implements EmailService {
 
     @Value("${mail.smtp.host}")
-    private String      host;
+    private String host;
 
     @Value("${mail.smtp.socketFactory.port}")
-    private String      socketFactoryPort;
+    private String socketFactoryPort;
 
     @Value("${mail.smtp.socketFactory.class}")
-    private String      socketFactoryClass;
+    private String socketFactoryClass;
 
     @Value("${mail.smtp.auth}")
-    private String      auth;
+    private String auth;
 
     @Value("${mail.smtp.port}")
-    private String      port;
+    private String port;
 
     @Value("${admin.email}")
-    private String      adminEmail;
+    private String adminEmail;
 
     @Value("${admin.password}")
-    private String      adminPassword;
+    private String adminPassword;
 
     private MimeMessage message;
 

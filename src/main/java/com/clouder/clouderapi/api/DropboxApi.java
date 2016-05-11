@@ -1,5 +1,7 @@
 package com.clouder.clouderapi.api;
 
+import java.net.URI;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -9,28 +11,23 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import com.clouder.clouderapi.document.User;
+import com.clouder.clouderapi.pojo.Cloud;
 import com.clouder.clouderapi.service.CloudService;
 import com.clouder.clouderapi.service.ResponseService;
-import com.clouder.clouderapi.service.UserService;
 
-@Path("auth/cloud")
+@Path("dropbox")
 @Component
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class AuthenticateUserCloudApi {
+public class DropboxApi {
 
     @Autowired
     private ResponseService responseService;
-
-    @Autowired
-    private UserService userService;
 
     @Context
     private HttpServletRequest servletRequest;
@@ -40,17 +37,17 @@ public class AuthenticateUserCloudApi {
     CloudService dropboxService;
 
     @GET
-    @Path("onedrive")
-    public Response authenticateOneDrive(@QueryParam("code") String token) {
-        User user = userService.getUserFromToken(token);
-        return responseService.getSuccessResponse(user, "User with token = " + token, Status.OK.getStatusCode());
+    @Path("add")
+    public Response addDropbox(@QueryParam("username") String username) {
+        Cloud cloud = dropboxService.addCloud(servletRequest, username);
+        return responseService.getSuccessResponse(cloud, "Cloud added successfully", 200);
     }
 
     @GET
-    @Path("dropbox")
+    @Path("authenticate")
     public Response authenticateDropbox(@QueryParam("username") String username) {
-        dropboxService.addCloud(servletRequest, username);
-        return responseService.getSuccessResponse(username, 200);
+        URI uri = dropboxService.authenticateCloud(servletRequest, username);
+        return Response.temporaryRedirect(uri).build();
     }
 
 }

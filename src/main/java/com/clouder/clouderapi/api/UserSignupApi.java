@@ -28,7 +28,7 @@ public class UserSignupApi {
     private ResponseService responseService;
 
     @Autowired
-    private UserService     userService;
+    private UserService userService;
 
     @POST
     public Response signup(String json) {
@@ -52,7 +52,7 @@ public class UserSignupApi {
                     Status.INTERNAL_SERVER_ERROR.getStatusCode());
         }
     }
-    
+
     @GET
     @Path("verifyemail")
     public Response verifyUser(@QueryParam("username") String username, @QueryParam("key") String key) {

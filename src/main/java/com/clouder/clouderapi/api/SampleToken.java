@@ -1,6 +1,7 @@
 package com.clouder.clouderapi.api;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -14,19 +15,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.clouder.clouderapi.service.ResponseService;
-import com.clouder.clouderapi.service.UserService;
 
 @Path("sample")
 @Component
 @Produces(MediaType.APPLICATION_JSON)
-// @Consumes(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class SampleToken {
 
     @Autowired
     private ResponseService responseService;
-
-    @Autowired
-    private UserService userService;
 
     @Context
     private HttpServletRequest servletRequest;

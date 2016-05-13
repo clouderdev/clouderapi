@@ -50,4 +50,12 @@ public class DropboxApi {
         return Response.temporaryRedirect(uri).build();
     }
 
+    @GET
+    @Path("files")
+    public Response listFiles(@QueryParam("username") String username, @QueryParam("cloudId") String cloudId,
+            @QueryParam("parent") String parentDir) {
+        dropboxService.listFiles(servletRequest, username);
+        return responseService.getSuccessResponse(cloudId, "List of files", 200);
+    }
+
 }

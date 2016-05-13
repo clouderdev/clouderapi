@@ -85,4 +85,10 @@ public class OneDriveServiceImpl implements CloudService {
         }
     }
 
+    @Override
+    public void listFiles(HttpServletRequest servletRequest, String username) {
+        // TODO Auto-generated method stub
+
+    }
+
 }

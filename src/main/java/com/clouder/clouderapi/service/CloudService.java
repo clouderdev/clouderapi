@@ -12,4 +12,6 @@ public interface CloudService {
 
     URI authenticateCloud(HttpServletRequest servletRequest, String username);
 
+    void listFiles(HttpServletRequest servletRequest, String username);
+
 }

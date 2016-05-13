@@ -2,6 +2,7 @@ package com.clouder.clouderapi.service.impl;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.clouder.clouderapi.document.User;
 import com.clouder.clouderapi.exception.CloudException;
+import com.clouder.clouderapi.exception.ClouderException;
 import com.clouder.clouderapi.pojo.Cloud;
 import com.clouder.clouderapi.pojo.DropBox;
 import com.clouder.clouderapi.service.CloudService;
@@ -30,6 +32,7 @@ import com.dropbox.core.DbxWebAuth.CsrfException;
 import com.dropbox.core.DbxWebAuth.NotApprovedException;
 import com.dropbox.core.DbxWebAuth.ProviderException;
 import com.dropbox.core.v2.DbxClientV2;
+import com.dropbox.core.v2.files.Metadata;
 
 @Service("dropbox")
 public class DropboxServiceImpl implements CloudService {
@@ -86,6 +89,25 @@ public class DropboxServiceImpl implements CloudService {
             throw new CloudException("Bad URL generated", e);
         }
         return authURI;
+    }
+
+    @Override
+    public void listFiles(HttpServletRequest servletRequest, String username) {
+        @SuppressWarnings("unchecked")
+        Map<String, String> parameterMap = servletRequest.getParameterMap();
+        String cloudId = parameterMap.get("cloudId");
+        String parentDir = parameterMap.get("parentDir");
+        User user = userService.findByUsername(username);
+        DropBox dropbox = (DropBox) user.getCloud(cloudId);
+        if (dropbox == null) {
+            throw new ClouderException("No such cloud exists", null);
+        }
+        DbxClientV2 dbxClient = new DbxClientV2(dbxRequestConfig, dropbox.getDropBoxAccessToken());
+        try {
+            List<Metadata> entries = dbxClient.files().listFolder(parentDir).getEntries();
+        } catch (DbxException e) {
+            e.printStackTrace();
+        }
     }
 
 }

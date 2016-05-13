@@ -115,6 +115,18 @@ public class User {
         return clouds.add(cloud);
     }
 
+    public Cloud getCloud(String email) {
+        if (clouds == null) {
+            return null;
+        }
+        for (Cloud cloud : clouds) {
+            if (cloud.getEmail().equals(email)) {
+                return cloud;
+            }
+        }
+        return null;
+    }
+
     public String getPublicKey() {
         return publicKey;
     }

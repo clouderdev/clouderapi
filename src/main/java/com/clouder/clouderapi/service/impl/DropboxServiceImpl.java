@@ -1,5 +1,6 @@
 package com.clouder.clouderapi.service.impl;
 
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -32,6 +33,8 @@ import com.dropbox.core.DbxWebAuth.CsrfException;
 import com.dropbox.core.DbxWebAuth.NotApprovedException;
 import com.dropbox.core.DbxWebAuth.ProviderException;
 import com.dropbox.core.v2.DbxClientV2;
+import com.dropbox.core.v2.files.DeleteErrorException;
+import com.dropbox.core.v2.files.DownloadErrorException;
 import com.dropbox.core.v2.files.Metadata;
 
 @Service("dropbox")
@@ -92,11 +95,8 @@ public class DropboxServiceImpl implements CloudService {
     }
 
     @Override
-    public void listFiles(HttpServletRequest servletRequest, String username) {
-        @SuppressWarnings("unchecked")
-        Map<String, String> parameterMap = servletRequest.getParameterMap();
-        String cloudId = parameterMap.get("cloudId");
-        String parentDir = parameterMap.get("parentDir");
+    public List<Metadata> listFiles(HttpServletRequest servletRequest, String username, String cloudId,
+            String parentDir) {
         User user = userService.findByUsername(username);
         DropBox dropbox = (DropBox) user.getCloud(cloudId);
         if (dropbox == null) {
@@ -104,9 +104,44 @@ public class DropboxServiceImpl implements CloudService {
         }
         DbxClientV2 dbxClient = new DbxClientV2(dbxRequestConfig, dropbox.getDropBoxAccessToken());
         try {
-            List<Metadata> entries = dbxClient.files().listFolder(parentDir).getEntries();
+            return dbxClient.files().listFolderBuilder(parentDir).withRecursive(false).start().getEntries();
         } catch (DbxException e) {
-            e.printStackTrace();
+            throw new ClouderException("Error occured in retrieving files", e);
+        }
+    }
+
+    @Override
+    public Metadata deleteFile(HttpServletRequest servletRequest, String username, String cloudId, String filePath) {
+        User user = userService.findByUsername(username);
+        DropBox dropbox = (DropBox) user.getCloud(cloudId);
+        if (dropbox == null) {
+            throw new ClouderException("No such cloud exists", null);
+        }
+        DbxClientV2 dbxClient = new DbxClientV2(dbxRequestConfig, dropbox.getDropBoxAccessToken());
+        try {
+            return dbxClient.files().delete(filePath);
+        } catch (DeleteErrorException e) {
+            throw new ClouderException("Unable to delete the file specified", e);
+        } catch (DbxException e) {
+            throw new ClouderException("Some error occured during file delete", e);
+        }
+    }
+
+    @Override
+    public InputStream downloadFile(HttpServletRequest servletRequest, String username, String cloudId,
+            String filePath) {
+        User user = userService.findByUsername(username);
+        DropBox dropbox = (DropBox) user.getCloud(cloudId);
+        if (dropbox == null) {
+            throw new ClouderException("No such cloud exists", null);
+        }
+        DbxClientV2 dbxClient = new DbxClientV2(dbxRequestConfig, dropbox.getDropBoxAccessToken());
+        try {
+            return dbxClient.files().download(filePath).getInputStream();
+        } catch (DownloadErrorException e) {
+            throw new ClouderException("Unable to download the file specified", e);
+        } catch (DbxException e) {
+            throw new ClouderException("Some error occured during file download", e);
         }
     }
 

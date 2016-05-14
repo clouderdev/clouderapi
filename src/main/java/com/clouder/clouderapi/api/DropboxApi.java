@@ -1,9 +1,12 @@
 package com.clouder.clouderapi.api;
 
+import java.io.InputStream;
 import java.net.URI;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -19,6 +22,7 @@ import org.springframework.stereotype.Component;
 import com.clouder.clouderapi.pojo.Cloud;
 import com.clouder.clouderapi.service.CloudService;
 import com.clouder.clouderapi.service.ResponseService;
+import com.dropbox.core.v2.files.Metadata;
 
 @Path("dropbox")
 @Component
@@ -51,11 +55,28 @@ public class DropboxApi {
     }
 
     @GET
-    @Path("files")
+    @Path("file")
     public Response listFiles(@QueryParam("username") String username, @QueryParam("cloudId") String cloudId,
-            @QueryParam("parent") String parentDir) {
-        dropboxService.listFiles(servletRequest, username);
-        return responseService.getSuccessResponse(cloudId, "List of files", 200);
+            @QueryParam("path") String parentDir) {
+        List<Metadata> listFiles = dropboxService.listFiles(servletRequest, username, cloudId, parentDir);
+        return responseService.getSuccessResponse(listFiles, "List of files", 200);
+    }
+
+    @DELETE
+    @Path("file")
+    public Response deleteFile(@QueryParam("username") String username, @QueryParam("cloudId") String cloudId,
+            @QueryParam("path") String filePath) {
+        Metadata metadata = dropboxService.deleteFile(servletRequest, username, cloudId, filePath);
+        return responseService.getSuccessResponse(metadata, "File deleted successfully", 200);
+    }
+
+    @GET
+    @Path("file/download")
+    public Response downloadFile(@QueryParam("username") String username, @QueryParam("cloudId") String cloudId,
+            @QueryParam("path") String filePath) {
+        InputStream inputStream = dropboxService.downloadFile(servletRequest, username, cloudId, filePath);
+        return Response.ok(inputStream).header("content-disposition", "attachment; filename=\"" + "file.xml" + "\"")
+                .build();
     }
 
 }

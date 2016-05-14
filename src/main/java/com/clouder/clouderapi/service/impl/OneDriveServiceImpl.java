@@ -1,7 +1,9 @@
 package com.clouder.clouderapi.service.impl;
 
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.client.Client;
@@ -24,6 +26,7 @@ import com.clouder.clouderapi.pojo.OneDrive;
 import com.clouder.clouderapi.service.CloudService;
 import com.clouder.clouderapi.service.UserService;
 import com.clouder.clouderapi.util.JsonUtility;
+import com.dropbox.core.v2.files.Metadata;
 
 @Service("onedrive")
 public class OneDriveServiceImpl implements CloudService {
@@ -86,9 +89,22 @@ public class OneDriveServiceImpl implements CloudService {
     }
 
     @Override
-    public void listFiles(HttpServletRequest servletRequest, String username) {
-        // TODO Auto-generated method stub
+    public List<Metadata> listFiles(HttpServletRequest servletRequest, String username, String cloudId,
+            String parentDir) {
+        return null;
+    }
 
+    @Override
+    public Metadata deleteFile(HttpServletRequest servletRequest, String username, String cloudId, String filePath) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public InputStream downloadFile(HttpServletRequest servletRequest, String username, String cloudId,
+            String filePath) {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

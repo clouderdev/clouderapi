@@ -120,7 +120,7 @@ public class User {
             return null;
         }
         for (Cloud cloud : clouds) {
-            if (cloud.getEmail().equals(email)) {
+            if (cloud.getEmail() != null && cloud.getEmail().equals(email)) {
                 return cloud;
             }
         }

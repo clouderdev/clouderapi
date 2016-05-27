@@ -41,8 +41,7 @@ public class User {
         // Default constructor for Jackson
     }
 
-    public User(String emailId, String firstName, String lastName, String username, String password,
-            List<Cloud> clouds) {
+    public User(String emailId, String firstName, String lastName, String username, String password, List<Cloud> clouds) {
         super();
         this.emailId = emailId;
         this.firstName = firstName;

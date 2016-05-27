@@ -80,8 +80,8 @@ public class UserServiceImpl implements UserService {
     }
 
     private String getEmailLink(String username) {
-        String currentTimeEncoded = new String(
-                Base64.encodeBase64(String.valueOf(System.currentTimeMillis()).getBytes(StandardCharsets.UTF_8)));
+        String currentTimeEncoded = new String(Base64.encodeBase64(String.valueOf(System.currentTimeMillis()).getBytes(
+                StandardCharsets.UTF_8)));
         return baseUrl + "user/verifyemail?username=" + username + "&key=" + currentTimeEncoded;
     }
 

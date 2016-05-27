@@ -24,7 +24,7 @@ public interface CloudService {
 
     InputStream downloadFile(String username, String cloudId, String filePath);
 
-    InputStream uploadFile(String username, String cloudId, String filePath, InputStream inputStream,
+    void uploadFile(String username, String cloudId, String filePath, InputStream inputStream,
             FormDataContentDisposition fileDetails) throws IOException;
 
 }

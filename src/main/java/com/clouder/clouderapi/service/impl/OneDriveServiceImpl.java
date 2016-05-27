@@ -84,7 +84,7 @@ public class OneDriveServiceImpl implements CloudService {
             // return new URI(URLEncoder.encode(uri,
             // StandardCharsets.UTF_8.name()));
             return new URI(uri);
-        } catch (URISyntaxException /* | UnsupportedEncodingException */ e) {
+        } catch (URISyntaxException /* | UnsupportedEncodingException */e) {
             throw new ClouderException("Invalid URI for OneDrive", e);
         }
     }
@@ -107,10 +107,9 @@ public class OneDriveServiceImpl implements CloudService {
     }
 
     @Override
-    public InputStream uploadFile(String username, String cloudId, String filePath, InputStream inputStream,
+    public void uploadFile(String username, String cloudId, String filePath, InputStream inputStream,
             FormDataContentDisposition fileDetails) {
         // TODO Auto-generated method stub
-        return null;
     }
 
 }

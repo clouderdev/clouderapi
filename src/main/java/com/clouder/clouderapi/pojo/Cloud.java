@@ -14,7 +14,7 @@ import com.clouder.clouderapi.enums.CloudType;
 
 @JsonTypeInfo(use = Id.NAME, include = As.PROPERTY, property = "cloudType")
 @JsonSubTypes({ @Type(value = GoogleDrive.class, name = "GOOGLEDRIVE"), @Type(value = DropBox.class, name = "DROPBOX"),
-        @Type(value = OneDrive.class, name = "ONEDRIVE") })
+    @Type(value = OneDrive.class, name = "ONEDRIVE") })
 public abstract class Cloud {
 
     @Transient

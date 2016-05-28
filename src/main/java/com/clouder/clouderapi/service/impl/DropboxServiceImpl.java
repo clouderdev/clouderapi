@@ -1,5 +1,6 @@
 package com.clouder.clouderapi.service.impl;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -9,6 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,7 @@ import com.clouder.clouderapi.document.User;
 import com.clouder.clouderapi.exception.CloudException;
 import com.clouder.clouderapi.exception.ClouderException;
 import com.clouder.clouderapi.pojo.Cloud;
+import com.clouder.clouderapi.pojo.Constants;
 import com.clouder.clouderapi.pojo.DropBox;
 import com.clouder.clouderapi.service.CloudService;
 import com.clouder.clouderapi.service.UserService;
@@ -86,7 +89,6 @@ public class DropboxServiceImpl implements CloudService {
         session.setAttribute("dbxSessionStore", dbxSessionStore);
         try {
             String authURL = dbxWebAuth.start();
-            System.out.println(authURL);
             authURI = new URI(authURL);
         } catch (URISyntaxException e) {
             throw new CloudException("Bad URL generated", e);
@@ -95,12 +97,11 @@ public class DropboxServiceImpl implements CloudService {
     }
 
     @Override
-    public List<Metadata> listFiles(HttpServletRequest servletRequest, String username, String cloudId,
-            String parentDir) {
+    public List<Metadata> listFiles(String username, String cloudId, String parentDir) {
         User user = userService.findByUsername(username);
         DropBox dropbox = (DropBox) user.getCloud(cloudId);
         if (dropbox == null) {
-            throw new ClouderException("No such cloud exists", null);
+            throw new ClouderException(Constants.NO_SUCH_CLOUD_EXIST, null);
         }
         DbxClientV2 dbxClient = new DbxClientV2(dbxRequestConfig, dropbox.getDropBoxAccessToken());
         try {
@@ -111,11 +112,11 @@ public class DropboxServiceImpl implements CloudService {
     }
 
     @Override
-    public Metadata deleteFile(HttpServletRequest servletRequest, String username, String cloudId, String filePath) {
+    public Metadata deleteFile(String username, String cloudId, String filePath) {
         User user = userService.findByUsername(username);
         DropBox dropbox = (DropBox) user.getCloud(cloudId);
         if (dropbox == null) {
-            throw new ClouderException("No such cloud exists", null);
+            throw new ClouderException(Constants.NO_SUCH_CLOUD_EXIST, null);
         }
         DbxClientV2 dbxClient = new DbxClientV2(dbxRequestConfig, dropbox.getDropBoxAccessToken());
         try {
@@ -128,12 +129,11 @@ public class DropboxServiceImpl implements CloudService {
     }
 
     @Override
-    public InputStream downloadFile(HttpServletRequest servletRequest, String username, String cloudId,
-            String filePath) {
+    public InputStream downloadFile(String username, String cloudId, String filePath) {
         User user = userService.findByUsername(username);
         DropBox dropbox = (DropBox) user.getCloud(cloudId);
         if (dropbox == null) {
-            throw new ClouderException("No such cloud exists", null);
+            throw new ClouderException(Constants.NO_SUCH_CLOUD_EXIST, null);
         }
         DbxClientV2 dbxClient = new DbxClientV2(dbxRequestConfig, dropbox.getDropBoxAccessToken());
         try {
@@ -143,6 +143,20 @@ public class DropboxServiceImpl implements CloudService {
         } catch (DbxException e) {
             throw new ClouderException("Some error occured during file download", e);
         }
+    }
+
+    @Override
+    public InputStream uploadFile(String username, String cloudId, String filePath, InputStream inputStream,
+            FormDataContentDisposition fileDetails) throws IOException {
+        System.out.println(username);
+        int d;
+        while ((d = inputStream.read()) != -1) {
+            System.out.println("d : " + d);
+        }
+        System.out.println(fileDetails.getSize());
+        System.out.println(cloudId);
+        System.out.println(filePath);
+        return inputStream;
     }
 
 }

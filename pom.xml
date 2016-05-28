@@ -58,13 +58,18 @@
 			<artifactId>jersey-container-servlet-core</artifactId>
 		</dependency>
 
+		<!-- http://mvnrepository.com/artifact/org.glassfish.jersey.media/jersey-media-multipart -->
+		<dependency>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-multipart</artifactId>
+		</dependency>
+
 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-
 
 		<dependency>
 			<groupId>org.glassfish.jersey.ext</groupId>

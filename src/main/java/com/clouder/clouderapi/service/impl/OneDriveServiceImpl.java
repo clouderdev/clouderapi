@@ -14,6 +14,7 @@ import javax.ws.rs.core.Form;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -89,20 +90,25 @@ public class OneDriveServiceImpl implements CloudService {
     }
 
     @Override
-    public List<Metadata> listFiles(HttpServletRequest servletRequest, String username, String cloudId,
-            String parentDir) {
+    public List<Metadata> listFiles(String username, String cloudId, String parentDir) {
         return null;
     }
 
     @Override
-    public Metadata deleteFile(HttpServletRequest servletRequest, String username, String cloudId, String filePath) {
+    public Metadata deleteFile(String username, String cloudId, String filePath) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public InputStream downloadFile(HttpServletRequest servletRequest, String username, String cloudId,
-            String filePath) {
+    public InputStream downloadFile(String username, String cloudId, String filePath) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public InputStream uploadFile(String username, String cloudId, String filePath, InputStream inputStream,
+            FormDataContentDisposition fileDetails) {
         // TODO Auto-generated method stub
         return null;
     }
